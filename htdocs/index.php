@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="app/assets/css/login.css">
+    <link rel="shortcut icon" href="app/assets/img/favicon.ico" type="image/x-icon">
     <title>Login - Parametrização</title>
 </head>
 
@@ -18,20 +19,21 @@
                 </div>
                 <div class="content">
 
-                    <form action="" method="post">
+                    <form action="src/funcoes/login.php" method="post">
+
                         <div class="group-input">
                             <label for="" class="label-input">Usuario</label>
-                            <input type="text" name="user" id="user" class="input-label">
+                            <input type="text" name="user" id="user" class="input-label" require>
                         </div> <!-- group-input -->
 
                         <div class="group-input">
                             <label for="" class="label-input">Senha</label>
-                            <input type="password" name="user" id="user" class="input-label">
+                            <input type="password" name="pass" id="pass" class="input-label" require>
                         </div> <!-- group-input -->
 
                         <div class="group-input-check">
-                            <input type="checkbox" id="check-lembrar">
-                            <label for="check-lembrar">  Me lembre novamente  </label>
+                            <input type="checkbox" id="check-lembrar" name="check-lembrar">
+                            <label for="check-lembrar" class="check-lembrar">  Me lembre novamente  </label>
                         </div> <!-- group-input -->
 
                         <div class="group-input"> 
@@ -44,9 +46,6 @@
             </div> <!-- section-login -->
 
             <div class="page section-img">
-                <div class="img">
-                    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEivJI9f7wTW8lbzp46y6P1-NWYwIGLahELLvqQWvNLcnys1sqbwoaKYh0qpcIvas-V6Uiz6ElckCzNJeCxjbKjWgLEfKzxQb6hS-m6qkTCufkDYv-GTAwQb13NDHFaHUlbwhKNUFhvRHxs/s1600/bem-vindo-bem-vindo-ou-benvindo.png" alt="Bem vindo " width="300">
-                </div>
             </div> <!-- section-img -->
 
         </div> <!-- login -->
