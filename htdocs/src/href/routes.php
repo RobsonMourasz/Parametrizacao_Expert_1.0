@@ -1,13 +1,10 @@
 <?php 
 use HTDOCS\funcoes\Conexao;
 
-//header("content-type: application/json");
-
+header("content-type: application/json");
 require_once __DIR__."/../funcoes/funcoes.php";
 
 if(isset($_POST['tipo']) && $_POST['tipo'] == "CadEscritorio"){
-    echo "acessou";
-    exit;
     $razao = filter_input(INPUT_POST, 'razao', FILTER_SANITIZE_SPECIAL_CHARS);
     $cpf_cnpj = limpar_texto(filter_input(INPUT_POST, 'cpf_cnpj', FILTER_SANITIZE_SPECIAL_CHARS));
     $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);

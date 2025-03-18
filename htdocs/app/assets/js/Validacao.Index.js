@@ -18,10 +18,7 @@
         inputs.append("tipo", "CadEscritorio")
         const CadastrarEscritorio = await fetch("../../src/href/routes.php",{
             method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(Object.fromEntries(inputs)),
+            body: inputs,
         })
 
         if (CadastrarEscritorio.ok){
