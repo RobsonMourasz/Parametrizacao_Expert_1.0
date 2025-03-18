@@ -41,4 +41,24 @@ class Conexao
         }
     }
 
+    public function Cadastrar($sql, $params) {
+        // Prepara a consulta
+        $stmt = $this->conexao->prepare($sql);
+
+        if ($stmt === false) {
+            return $this->conexao->error;
+        }
+
+        // Desestrutura os parâmetros e os vincula
+        if (!empty($params)) {
+            $stmt->bind_param(...$params);
+        }
+
+        // Executa a consulta
+        if ($stmt->execute()) {
+            return true;
+        } else {
+            return $stmt->error;
+        }
+    }
 }
