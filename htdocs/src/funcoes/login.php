@@ -1,5 +1,5 @@
 <?php
-    use HTDOCS\funcoes\Conexao;
+    use HTDOCS\funcoes\VerificarPagina;
     require_once __DIR__."/../../vendor/autoload.php";
 
     $conexao = new Conexao();
@@ -15,7 +15,7 @@
             if (count($usuarios) == 1) {
                 $hash = $usuarios[0]['senha'];
                 if (password_verify($password, $hash)) {
-                    header("Location: ../../public/index.php");
+                    header("Location: ../../public/ADM/index.php");
                 } else {
                     ?><script>alert("Senha incorreta!"); window.location.href = '../../index.php';</script><?php
                 }
