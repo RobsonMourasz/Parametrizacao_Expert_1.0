@@ -23,8 +23,8 @@
 
         if (CadastrarEscritorio.ok){
             alerta("success","Escritorio cadastrado com sucesso")
-            limparInputs(document.getElementById("form-cadastro-escritorio"))
-            location.assign("?page=ModeloCertificado");
+            limparInputs("form-cadastro-escritorio")
+            window.location.assign("?page=ModeloCertificado");
         }else{
             alerta("danger","Erro ao cadastrar escritorio")
         }

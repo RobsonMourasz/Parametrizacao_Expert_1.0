@@ -52,7 +52,8 @@
             })
 
             if (response.ok){
-
+                alerta("success", "Modelo de certificado cadastrado com sucesso!");
+                window.location.href = "?page=RegimeTributacao";
             }else{
                 alerta("danger", "Erro na sincronização!");
             }

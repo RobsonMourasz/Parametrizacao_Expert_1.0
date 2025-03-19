@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="../../app/assets/css/style.css">
     <link rel="stylesheet" href="../../app/assets/css/user.css">
     <title>Parametrização Expert</title>
+    <script src="../../app/assets/js/Funcoes.Feitas.js"></script>
 </head>
 <body>
     <div class="alert"><small></small>
@@ -20,6 +21,6 @@
     <?php new VerificarPagina("USER"); ?>
     </div> <!-- container -->
 
-    <script src="../../app/assets/js/Funcoes.Feitas.js"></script>
+    
 </body>
 </html>

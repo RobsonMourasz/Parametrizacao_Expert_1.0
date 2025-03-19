@@ -289,6 +289,55 @@ input[type="checkbox"]:checked::after {
 
 }
 
+.group-input-radio{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 1em;
+    position: relative;
+}
+
+.group-input-radio input[type="radio"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 15px;
+    height: 15px;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    position: relative;
+    cursor: pointer;
+    outline: none;
+    margin: 0 .5em;
+}
+
+.group-input-radio input[type="radio"]:checked {
+    background-color: #ccc;
+    border: 2px solid #00b1f7;
+    opacity: 0;
+    animation: opacity .3s ease-in forwards;
+}
+
+.group-input-radio input[type="radio"]:checked::after {
+    content: "";
+    position: absolute;
+    width: 10px;
+    height: 20px;
+    border: solid #222;
+    border-width: 0 2px 2px 0;
+    top: -12px;
+    left: 2px;
+    transform: rotate(45deg);
+}
+
+.radio-body > label{
+    cursor: pointer;
+    user-select: none;
+}
+
+.radio-title > label{
+    cursor: default;
+}
+
 /* Estilo para a área de arraste e solte */
 .file-drop-zone {
     display: flex;
