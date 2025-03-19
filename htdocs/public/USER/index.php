@@ -21,6 +21,5 @@
     </div> <!-- container -->
 
     <script src="../../app/assets/js/Funcoes.Feitas.js"></script>
-    <script src="../../app/assets/js/Validacao.Index.js"></script>
 </body>
 </html>

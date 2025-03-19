@@ -41,3 +41,5 @@
     </div> <!-- card-body -->
 
 </div> <!-- card -->
+
+<script src="../../app/assets/js/Home.Validacao.Index.js"></script>
