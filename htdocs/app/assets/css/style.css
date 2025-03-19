@@ -296,8 +296,8 @@ input[type="checkbox"]:checked::after {
     justify-content: center;
     flex-direction: column;
     width: 100%;
-    max-width: 400px;
-    height: 150px;
+    max-width: 600px;
+    height: 80px;
     border: 2px dashed #00b1f7;
     border-radius: 10px;
     background-color: #f9f9f9;

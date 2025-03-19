@@ -5,7 +5,7 @@
     </div> <!-- card-header -->
 
     <div class="card-body w-100 center">
-        <form class="center" id="form-cadastro-modelo-certificado">
+        <form class="center" id="form-cadastro-modelo-certificado" method="post" enctype="multipart/form-data">
 
             <div class="group-input-check">
                 <input type="checkbox" name="ModeloCertificado" id="cad_modelo_a1" require>
