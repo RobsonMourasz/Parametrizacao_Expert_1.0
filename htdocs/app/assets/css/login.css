@@ -210,4 +210,8 @@ input[type="checkbox"]:checked::after {
         width: 90%;
     }
 
+    form,
+    .content{
+        height: auto;
+    }
 }

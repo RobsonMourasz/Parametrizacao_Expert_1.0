@@ -1,61 +1,73 @@
 (() => {
-    const Emitir_NFCe = document.getElementById('nfce-sim');
-    const Emitir_NFe = document.getElementById('nfe-sim');
-    const Emitir_SAT = document.getElementById('sat-sim');
+    const Emitir_NFCe = document.getElementsByName('nfce');
+    const Emitir_NFe = document.getElementsByName('nfe');
+    const Emitir_SAT = document.getElementsByName('sat');
     const JaEmitiu_NFCe = document.getElementsByName('nfce-emitida');
     const JaEmitiu_NFe = document.getElementsByName('nfe-emitida');
     const JaEmitiu_SAT = document.getElementsByName('sat-emitida-sim');
 
-    VerificarRadio(JaEmitiu_NFe,"ultima_nfe");
-    VerificarRadio(JaEmitiu_NFCe,"ultima_nfce");
+    document.getElementById("nfce-emitida-sim").addEventListener("change", () => {
+        document.getElementById("ultima_nfce").classList.remove("d-none");
+    });
 
-    document.getElementById("form-cadastro-tipo-fiscal").addEventListener("submit", async(e)=>{
+    document.getElementById("nfce-emitida-nao").addEventListener("change", () => {
+        document.getElementById("ultima_nfce").classList.add("d-none");
+    });
+
+    document.getElementById("nfe-emitida-sim").addEventListener("change", () => {
+        document.getElementById("ultima_nfe").classList.remove("d-none");
+    });
+
+    document.getElementById("nfe-emitida-nao").addEventListener("change", () => {
+        document.getElementById("ultima_nfe").classList.add("d-none");
+    });
+
+
+
+
+    document.getElementById("form-cadastro-tipo-fiscal").addEventListener("submit", async (e) => {
         e.preventDefault();
 
-        if (ValidacaoRadios(Emitir_NFCe) === false && ValidacaoRadios(Emitir_NFe) && ValidacaoRadios(Emitir_SAT) && ValidacaoRadios(JaEmitiu_NFCe) && ValidacaoRadios(JaEmitiu_NFe) && ValidacaoRadios(JaEmitiu_SAT)){
-            alerta("danger", "Selecione os Campos !!!")
+        if (!ValidacaoRadios(Emitir_NFCe)) {
+            alerta("danger", "Selecione uma opção se irá emitir NFC-e!");
+            return; // Interrompe a execução se nenhum botão foi marcado
+
         }
+
+        if (!ValidacaoRadios(Emitir_NFe)) {
+            alerta("danger", "Selecione uma opção se irá emitir NF-e!");
+            return; // Interrompe a execução se nenhum botão foi marcado
+        }
+
+        if (!ValidacaoRadios(Emitir_SAT)) {
+            alerta("danger", "Selecione uma opção se irá emitir SAT!");
+            return; // Interrompe a execução se nenhum botão foi marcado
+        }
+
+        if (!ValidacaoRadios(JaEmitiu_NFCe)) {
+            alerta("danger", "Selecione uma opção se já emitiu NFC-e!");
+            return; // Interrompe a execução se nenhum botão foi marcado
+        }
+
+        if (!ValidacaoRadios(JaEmitiu_NFe)) {
+            alerta("danger", "Selecione uma opção se já emitiu NF-e!");
+            return; // Interrompe a execução se nenhum botão foi marcado
+        }
+
+        if (!ValidacaoRadios(JaEmitiu_SAT)) {
+            alerta("danger", "Selecione uma opção se já emitiu SAT!");
+            return; // Interrompe a execução se nenhum botão foi marcado
+        }
+        
     })
 
 })();
 
-
-function VerificarRadio(params,inputAfetar) {
-    let selecionado = null;
+function ValidacaoRadios(params) {
     for (const radio of params) {
         if (radio.checked) {
-            selecionado = radio.value; // Valor da opção selecionada
-            break;
+            return radio.value; // Retorna o valor da opção selecionada
         }
     }
-
-    if (selecionado) {
-        if (selecionado == "Sim"){
-            document.getElementById(inputAfetar).classList.remove('d-none');
-        }else{
-            document.getElementById(inputAfetar).classList.add('d-none');
-        }
-        // Aqui você pode prosseguir com o envio ou lógica adicional
-    } else {
-        alert("Por favor, selecione uma opção (Sim ou Não).");
-    }
-}
-
-function ValidacaoRadios(params) {
-    Array.from(params).forEach(radio => {
-        radio.addEventListener('change', () => {
-            console.log('teste');
-            let selecionado = null;
-            for (const radio of params) {
-                if (radio.checked) {
-                    selecionado = radio.value; // Valor da opção selecionada
-                    break;
-                }
-            }
-
-            if (!selecionado) {
-                return false;
-            }
-        });
-    });
+    return false; // Retorna false se nenhuma opção foi selecionada
 }
