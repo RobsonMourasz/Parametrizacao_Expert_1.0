@@ -4,7 +4,7 @@
     const Emitir_SAT = document.getElementsByName('sat');
     const JaEmitiu_NFCe = document.getElementsByName('nfce-emitida');
     const JaEmitiu_NFe = document.getElementsByName('nfe-emitida');
-    const JaEmitiu_SAT = document.getElementsByName('sat-emitida-sim');
+    const JaEmitiu_SAT = document.getElementsByName('sat-emitida');
 
     document.getElementById("nfce-emitida-sim").addEventListener("change", () => {
         document.getElementById("ultima_nfce").classList.remove("d-none");
@@ -57,6 +57,29 @@
         if (!ValidacaoRadios(JaEmitiu_SAT)) {
             alerta("danger", "Selecione uma opção se já emitiu SAT!");
             return; // Interrompe a execução se nenhum botão foi marcado
+        }
+
+        if (document.getElementById("nfce-emitida-sim").checked && document.getElementById("ultima_nfce").value == "") {
+            alerta("danger", "Preencha qual a ultima NFC-e emitida!");
+            document.getElementById("ultima_nfce").focus();
+        }
+
+        if (document.getElementById("nfe-emitida-sim").checked && document.getElementById("ultima_nfe").value == "") {
+            alerta("danger", "Preencha qual a ultima NFC-e emitida!");
+            document.getElementById("ultima_nfe").focus();
+        }
+
+        const formData = new FormData(document.getElementById("form-cadastro-tipo-fiscal"));
+        formData.append('tipo', 'CadTipoFiscal');
+        const response = await fetch('../../src/href/routes.php', {
+            method: 'POST',
+            body: formData,
+        });
+        if(response.ok){
+            alerta("success", "Tipo Fiscal cadastrado com sucesso!");
+            window.location.assign('?page=Tributacao');
+        }else{
+            alerta("danger", "Erro ao cadastrar tipo fiscal!");
         }
         
     })

@@ -62,3 +62,23 @@ if(isset($_POST['tipo']) && $_POST['tipo'] == "CadRegimeTributario"){
     // $conexao = new Conexao();
     // $SqlInsert = "INSERT cadregimetributario (RegimeTributario, DataCadastro, Modificacao) VALUES (?,?,NOW())";
 }
+
+/*CADASTRAR QUAIS TIPOS DE EMISSAO FISCAL*/
+if(isset($_POST['tipo']) && $_POST['tipo'] == "CadTipoEmissao"){
+    $IraEmitir_NFCE = filter_input(INPUT_POST, 'nfce', FILTER_SANITIZE_SPECIAL_CHARS);
+    $IraEmitir_NFE = filter_input(INPUT_POST, 'nfe', FILTER_SANITIZE_SPECIAL_CHARS);
+    $IraEmitir_SAT = filter_input(INPUT_POST, 'sat', FILTER_SANITIZE_SPECIAL_CHARS);
+    $JaEmitiu_NFCe = filter_input(INPUT_POST, 'nfce-emitida', FILTER_SANITIZE_SPECIAL_CHARS);
+    $JaEmitiu_NFe = filter_input(INPUT_POST, 'nfe-emitida', FILTER_SANITIZE_SPECIAL_CHARS);
+    $JaEmitiu_SAT = filter_input(INPUT_POST, 'sat-emitida', FILTER_SANITIZE_SPECIAL_CHARS);
+    $Ultima_NFCe = filter_input(INPUT_POST, 'ultima_nfce', FILTER_SANITIZE_SPECIAL_CHARS);
+    $Ultima_NFe = filter_input(INPUT_POST, 'ultima_nfe', FILTER_SANITIZE_SPECIAL_CHARS);
+    // $conexao = new Conexao();
+    // $SqlInsert = "INSERT cadtipoemissao (Nfce, Nfe, Sat, DataCadastro, Modificacao) VALUES (?,?,?,NOW(),NOW())";
+    // $Variaveis = ['sss',$nfce,$nfe,$sat];
+    // if($conexao->Cadastrar($SqlInsert, $Variaveis)){
+    //     echo json_encode(["status" => "ok", "msg" => "Cadastrado com sucesso!"]);
+    // }else{
+    //     json_encode(["status" => "erro", "msg" => "Erro"]);
+    // }
+}
