@@ -41,7 +41,7 @@
 
         if (response.ok){
             alerta("success","Tributação cadastrada com sucesso");
-            window.location.href = "?page=VerificarTributacao.php";
+            window.location.href = "?page=VerificarTributacao";
         }else{
             alerta("danger","Erro ao cadastrar tributação");
         }

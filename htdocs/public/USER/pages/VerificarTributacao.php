@@ -5,7 +5,7 @@
     </div> <!-- card-header -->
 
     <div class="card-body w-100 center">
-        <form class="center" id="form-cadastro-tributacao">
+        <form class="center" id="form-verificar-tributacao">
 
             <div class="row">
 
@@ -48,8 +48,6 @@
                 <button type="submit" class="btn btn-success">Próximo</button>
             </div>
         </form>
-    </div>
-
-</div> <!-- card-body -->
-
+    </div> <!-- card-body -->
 </div> <!-- card -->
+<script src="../../app/assets/js/VerificarTributacao.Validacao.js"></script>

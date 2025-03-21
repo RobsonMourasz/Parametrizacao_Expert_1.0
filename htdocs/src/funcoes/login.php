@@ -1,5 +1,5 @@
 <?php
-    use HTDOCS\funcoes\VerificarPagina;
+    use HTDOCS\funcoes\Conexao;
     require_once __DIR__."/../../vendor/autoload.php";
 
     $conexao = new Conexao();
