@@ -22,36 +22,6 @@
     align-items: center;
 }
 
-.col-2{
-    width: calc(2 / 100%);
-    display: flex;
-    flex: 1;
-    flex-flow: column wrap;
-}
-
-.col-4{
-    width: calc(4 / 100%);
-    display: flex;
-    flex-flow: column wrap;
-}
-
-.col-6{
-    width: calc(6 / 100%);
-    display: flex;
-    flex-flow: column wrap;
-}
-
-.col-8{
-    width: calc(8 / 100%);
-    display: flex;
-    flex-flow: column wrap;
-}
-
-.col-12{
-    width: calc(12 / 100%);
-    display: flex;
-    flex-flow: column wrap;
-}
 
 
 
@@ -60,13 +30,22 @@
 }
 
 .w-100{
-    width: 100%;
+    width: 100% !important;
+}
+.w-50{
+    width: 50% !important;
+}
+.w-70{
+    width: 70% !important;
+}
+.w-30{
+    width: 30% !important;
 }
 
 .container{
     width: 100%; 
     display: flex;
-    flex-flow: row wrap 100px;
+    flex-flow: column wrap;   
     background-color: white;
     padding: 2em .5em;
 }
@@ -76,6 +55,14 @@
     justify-content: center;
     align-items: center;
     text-align: center;
+}
+
+.align-left{
+    justify-content: left !important;
+}
+
+.justify-content-left{
+    justify-content: left !important;
 }
 
 .group-input{
@@ -103,6 +90,7 @@
     border-radius: 5px;
     padding: .7em 1em;
     margin: .5em 0;
+    color: #777777;
 }
 
 .group-input >input[type="text"]:focus,
