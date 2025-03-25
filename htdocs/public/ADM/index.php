@@ -23,18 +23,30 @@
                 <div class="pesquisa">
                     <form action="" method="post">
                         <div class="row center">
-                            <div class="group-input w-50">
-                                <input type="text" name="pesquisa" id="pesquisa" placeholder="Pesquisar">
+                            <div class="col align-left">
+                                <div class="group-input w-100">
+                                    <input type="text" name="pesquisa" id="pesquisa" placeholder="Pesquisar">
+                                </div>
                             </div>
-                            <div class="group-botoes w-30 align-left">
-                                <input type="submit" name="pesquisar" id="pesquisar" class="btn btn-primary" value="pesquisar">
+                            <div class="col align-left">
+                                <div class="group-botoes w-30 align-left">
+                                    <input type="submit" name="pesquisar" id="pesquisar" class="btn btn-primary" value="pesquisar">
+
+                                </div>
                             </div>
+
                         </div>
                     </form>
-                    <div class="col">
-                        <div class="group-botoes justify-content-left" >
-                            <button class="btn btn-success">Adicionar</button>
-                            <button class="btn btn-info">Visualizar</button>
+                    <div class="row">
+                        <div class="col">
+                            <div class="group-botoes justify-content-left">
+                                <button class="btn btn-success">Adicionar</button>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="group-botoes justify-content-left">
+                                <button class="btn btn-info">Visualizar</button>
+                            </div>
                         </div>
                     </div>
                 </div><!--pesquisa-->
