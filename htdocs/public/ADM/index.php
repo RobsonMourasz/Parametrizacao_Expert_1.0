@@ -74,13 +74,13 @@
                         <div class="table-row">
                             <div class="table-cell">HS BEBIDAS</div>
                             <div class="table-cell">56.991.836/0001-50</div>
-                            <div class="table-cell">Preenchido</div>
+                            <div class="table-cell"><span class="falso">Não preenchido</span></div>
                         </div> <!-- table-row -->
 
                         <div class="table-row">
                             <div class="table-cell">MR ELETRICA AUTOMOTIVA/ROMES JOSE DE OLIVEIRA</div>
                             <div class="table-cell">58.654.857/0001-05</div>
-                            <div class="table-cell">Preenchido</div>
+                            <div class="table-cell"><span class="verdadeiro">Preenchido</span></div>
                         </div> <!-- table-row -->
 
                     </div> <!-- table-body -->
@@ -157,7 +157,7 @@
 
     <!-- FIM TELA MODAL -->
 
-
+    <script src="../../app/assets/js/ADM.index.js"></script>
 </body>
 
 </html>
