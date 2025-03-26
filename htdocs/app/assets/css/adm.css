@@ -63,6 +63,15 @@
     width: 50%;
 }
 
+.table-body .table-cell:nth-child(1){
+    cursor: pointer;
+    user-select: none;
+}
+
+.table-body .table-row:hover {
+    background-color: #ccc;
+}
+
 .table-body .table-cell:nth-child(2){
     text-align: left;
 }
@@ -87,6 +96,61 @@
     color: white !important;
 }
 
+.modal{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 100px;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+.modal-content{
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    width: 80%;
+    max-width: 500px;
+}
+
+.modal-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.modal-body{
+    display: flex;
+    flex-direction: column;
+    margin: 10px ;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.modal-form{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.modal-header .close{
+    cursor: pointer;
+}
+
+.modal-body .row,
+.modal-body .col{
+    padding: 0;
+    margin: 0;
+}
+
+.modal-body .col{
+    min-width: auto;
+}
 
 @media screen and (max-width: 1050px){
     .table-body .table-cell span{
@@ -96,6 +160,12 @@
     .table-header .table-cell span{
         text-align: right;
     }
+
+    .modal-body{
+        max-height: 300px;
+    }
+
+
 } 
 
 @media screen and (max-width: 580px){ 
@@ -127,5 +197,13 @@
 
     .table-body .table-cell span{
         width: 60%;
+    }
+
+    .modal-body{
+        max-height: 350px;
+    }
+
+    .modal-body .group-input{
+        padding: 0;   
     }
 }

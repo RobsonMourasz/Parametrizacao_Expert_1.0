@@ -72,13 +72,13 @@
                     <div class="table-body">
 
                         <div class="table-row">
-                            <div class="table-cell">HS BEBIDAS</div>
+                            <div class="table-cell" ondblclick="AbrirModal(2)" id="2">HS BEBIDAS</div>
                             <div class="table-cell">56.991.836/0001-50</div>
                             <div class="table-cell"><span class="falso">Não preenchido</span></div>
                         </div> <!-- table-row -->
 
                         <div class="table-row">
-                            <div class="table-cell">MR ELETRICA AUTOMOTIVA/ROMES JOSE DE OLIVEIRA</div>
+                            <div class="table-cell" ondblclick="AbrirModal(1)" id="1">MR ELETRICA AUTOMOTIVA/ROMES JOSE DE OLIVEIRA</div>
                             <div class="table-cell">58.654.857/0001-05</div>
                             <div class="table-cell"><span class="verdadeiro">Preenchido</span></div>
                         </div> <!-- table-row -->
@@ -94,28 +94,118 @@
 
     <!-- TELA MODAL -->
 
-    <div class="modal d-none" id="modal-empresa">
+    <div class="modal d-none" id="modal-visualizar-empresa">
 
         <div class="modal-content">
 
             <div class="modal-header">
+                <h2>Visualizar Empresa</h2>
                 <span class="close">&times;</span>
-                <h2>Cadastrar Empresa</h2>
             </div>
             <div class="modal-body">
-                <form action="" id="form-empresa">
-                    <label for="nome">Nome da Empresa</label>
-                    <input type="text" name="nome" id="nome">
-                    <label for="cnpj">CNPJ</label>
-                    <input type="text" name="cnpj" id="cnpj">
-                    <label for="status">Status</label>
-                    <input type="text" name="status" id="status">
+                <form action="" id="form-empresa" class="modal-form">
+                    <div class="group-input">
+                        <label for="nome">Nome da Empresa</label>
+                        <input type="text" name="nome" id="nome" value="">
+                    </div>
+                    <div class="group-input">
+                        <label for="cnpj">CNPJ</label>
+                        <input type="text" name="cnpj" id="cnpj" value="">
+                    </div>
+                    <div class="group-input">
+                        <label for="status">Escritório</label>
+                        <input type="text" name="status" id="status" value="">
+                    </div>
+                    <div class="group-input">
+                        <label for="status">CPF ou CNPJ do escritório</label>
+                        <input type="text" name="status" id="status" value="">
+                    </div>
+                    <div class="group-input">
+                        <label for="status">Email do escritório</label>
+                        <input type="text" name="status" id="status" value="">
+                    </div>
+                    <div class="group-input">
+                        <label for="status">Telefone</label>
+                        <input type="text" name="status" id="status" value="">
+                    </div>
+                    <div class="group-input">
+                        <label for="status">Responsável por preencher</label>
+                        <input type="text" name="status" id="status" value="">
+                    </div>
+                    <div class="group-input">
+                        <label for="status">Usuario Expert</label>
+                        <input type="text" name="status" id="status" value="">
+                    </div>
+                    <div class="group-input">
+                        <label for="status">Modelo Certificado</label>
+                        <input type="text" name="status" id="status" value="">
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <div class="group-input">
+                                <label for="status">Já emitiu NFC-e ?</label>
+                                <input type="text" name="status" id="status" value="">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="group-input">
+                                <label for="status">Já emitiu NF-e ?</label>
+                                <input type="text" name="status" id="status" value="">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="group-input">
+                                <label for="status">Já emitiu SAT ?</label>
+                                <input type="text" name="status" id="status" value="">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <div class="group-input">
+                                <label for="status">Vai emitir NFC-e ?</label>
+                                <input type="text" name="status" id="status" value="">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="group-input">
+                                <label for="status">Vai emitir NF-e ?</label>
+                                <input type="text" name="status" id="status" value="">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="group-input">
+                                <label for="status">Vai emitir SAT ?</label>
+                                <input type="text" name="status" id="status" value="">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <div class="group-input">
+                                <label for="status">Ultima NFC-e ?</label>
+                                <input type="text" name="status" id="status" value="">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="group-input">
+                                <label for="status">Ultima NF-e ?</label>
+                                <input type="text" name="status" id="status" value="">
+                            </div>
+                        </div>
+                    </div>
                 </form>
             </div>
 
             <div class="modal-footer">
-                <button class="btn-cancelar">Cancelar</button>
-                <button class="btn-salvar">Salvar</button>
+                <div class="group-botoes">
+                    <button class="btn btn-primary">Cancelar</button>
+                    <button class="btn btn-success">Salvar</button>
+                </div>
+
             </div>
 
         </div> <!-- modal-content -->
@@ -127,28 +217,37 @@
 
     <!-- TELA MODAL -->
 
-    <div class="modal d-none" id="modal-empresa">
+    <div class="modal d-none" id="modal-cadastrar-empresa">
 
         <div class="modal-content">
 
             <div class="modal-header">
-                <span class="close">&times;</span>
                 <h2>Cadastrar Empresa</h2>
+                <span class="close">&times;</span>
             </div>
             <div class="modal-body">
-                <form action="" id="form-empresa">
-                    <label for="nome">Nome da Empresa</label>
-                    <input type="text" name="nome" id="nome">
-                    <label for="cnpj">CNPJ</label>
-                    <input type="text" name="cnpj" id="cnpj">
-                    <label for="status">Status</label>
-                    <input type="text" name="status" id="status">
+                <form action="" id="form-empresa" class="modal-form">
+                    <div class="group-input">
+                        <label for="nome">Nome da Empresa</label>
+                        <input type="text" name="nome" id="nome">
+                    </div>
+                    <div class="group-input">
+                        <label for="cnpj">CNPJ</label>
+                        <input type="text" name="cnpj" id="cnpj">
+                    </div>
+                    <div class="group-input">
+                        <label for="status">Status</label>
+                        <input type="text" name="status" id="status">
+                    </div>
                 </form>
             </div>
 
             <div class="modal-footer">
-                <button class="btn-cancelar">Cancelar</button>
-                <button class="btn-salvar">Salvar</button>
+                <div class="group-botoes">
+                    <button class="btn btn-primary">Cancelar</button>
+                    <button class="btn btn-success">Salvar</button>
+                </div>
+
             </div>
 
         </div> <!-- modal-content -->
