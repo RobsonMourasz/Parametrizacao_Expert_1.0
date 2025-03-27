@@ -9,11 +9,11 @@
         $password = filter_input(INPUT_POST, 'pass', FILTER_SANITIZE_SPECIAL_CHARS);
         $sql = "SELECT * FROM usuarios WHERE email = '".$usuario."'";
         $usuarios = array($conexao->ExecutarSql($sql));
-        if ($usuarios[0] === "Não há registros"){
+        if ($usuarios[0][0] === "Não há registros"){
             ?><script>alert("Usuario não encontrado"); window.location.href = '../../index.php';</script><?php
         }else{
-            if (count($usuarios) == 1) {
-                $hash = $usuarios[0]['senha'];
+            if (count($usuarios[0]) == 1) {
+                $hash = $usuarios[0][0]['senha'];
                 if (password_verify($password, $hash)) {
                     header("Location: ../../public/ADM/index.php");
                 } else {
