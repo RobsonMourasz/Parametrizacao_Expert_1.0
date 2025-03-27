@@ -91,12 +91,12 @@ if (isset($_GET['idVisualizarParametrizacao']) && !empty($_GET['idVisualizarPara
         b.NomeEmpresa,	b.Cpf_Cnpj AS Cpf_Cnpj_empresa, 
         c.RazaoSocial, c.CpfCnpj, c.Email, c.Telefone, c.NomeResponsavel,
         d.nome AS usuario,
-        a.ModeloCertificado, a.SenhaCertificado, a.RegimeTributario, a.IraEmitirNFCe, a.IraEmitirNFe, a.IraEmitirSat, a.JaEmitiuNFCe, a.JaEmitiuNFe, a.JaEmitiuSat, a.UltimaNFCe, a.UltimaNFe
+        a.ModeloCertificado, a.SenhaCertificado, a.RegimeTributario, a.IraEmitirNFCe, a.IraEmitirNFe, a.IraEmitirSat, a.JaEmitiuNFCe, a.JaEmitiuNFe, a.JaEmitiuSat, a.UltimaNFCe, a.UltimaNFe, a.id, a.ModoPreenchimento
         FROM mv_parametrizacao a
         LEFT JOIN cadempresa b ON a.IdEmpresa = b.id
         LEFT JOIN cadcontador c ON a.IdContador = c.IdContador
         LEFT JOIN usuarios d ON a.IdUsuario = d.id");
-    
+
         echo json_encode(["status" => "ok", "msg" => $res]);
 
     }else{

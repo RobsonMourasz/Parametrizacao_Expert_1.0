@@ -65,19 +65,7 @@
                         </div> <!-- table-row -->
                     </div> <!-- table-header -->
 
-                    <div class="table-body">
-
-                        <div class="table-row">
-                            <div class="table-cell" ondblclick="AbrirModal(2)" id="2">HS BEBIDAS</div>
-                            <div class="table-cell">56.991.836/0001-50</div>
-                            <div class="table-cell"><span class="falso">Não preenchido</span></div>
-                        </div> <!-- table-row -->
-
-                        <div class="table-row">
-                            <div class="table-cell" ondblclick="AbrirModal(1)" id="1">MR ELETRICA AUTOMOTIVA/ROMES JOSE DE OLIVEIRA</div>
-                            <div class="table-cell">58.654.857/0001-05</div>
-                            <div class="table-cell"><span class="verdadeiro">Preenchido</span></div>
-                        </div> <!-- table-row -->
+                    <div class="table-body" id="table-body-empresas">
 
                     </div> <!-- table-body -->
 
@@ -264,6 +252,7 @@
     <!-- FIM TELA MODAL -->
 
     <script src="../../app/assets/js/ADM.index.js"></script>
+    <script src="../../app/assets/js/Funcoes.Feitas.js"></script>
 </body>
 
 </html>
