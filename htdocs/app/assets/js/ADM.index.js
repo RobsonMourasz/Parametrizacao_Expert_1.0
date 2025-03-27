@@ -6,6 +6,11 @@
         Modal.style.display = "flex";
     });
 
+    document.addEventListener("DOMContentLoaded", async () => {
+        const DadosEmpresas = await BuscarEmpresas();
+        console.log(DadosEmpresas);
+    });
+
 })();
 
 async function AbrirModal(id) {
@@ -59,4 +64,29 @@ async function AbrirModal(id) {
 function FecharModal(id) {
     const Modal = document.getElementById(id);
     Modal.style.display = "none";
+}
+
+async function BuscarEmpresas() {
+    try {
+        const response = await fetch(`../../src/href/routes.php?idVisualizarParametrizacao=todos`);
+        const data = await response.json();
+        let DadosEmpresas = [];
+        if (data.status === "ok") {
+
+            if (data.msg === "Não há registros"){
+                return "Não há registros";
+            }else{
+                for (let index = 0; index < data.msg.length; index++) {
+                    DadosEmpresas.push(data.msg[index]);
+                }
+
+                return DadosEmpresas;
+            }
+            
+        } else {
+            console.error("Erro ao carregar os dados:", data.msg);
+        }
+    } catch (error) {
+        console.error("Erro na requisição:", error);
+    }
 }

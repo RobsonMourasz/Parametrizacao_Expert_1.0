@@ -31,7 +31,7 @@ class Conexao
         if ($result){
 
             if ($result->num_rows > 0) {
-                return $result->fetch_assoc();
+                return $result->fetch_all(MYSQLI_ASSOC);
             }else{
                 return "Não há registros";
             }
