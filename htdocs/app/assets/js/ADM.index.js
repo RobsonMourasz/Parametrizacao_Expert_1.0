@@ -1,9 +1,9 @@
-(()=>{
+(() => {
     let DadosEmpresas = [];
     const AddParametrizacao = document.getElementById("adicionar-parametrizacao");
     let AbrirModalVisualizar = document.getElementById("table-body-empresas");
 
-    AddParametrizacao.addEventListener("click", ()=>{
+    AddParametrizacao.addEventListener("click", () => {
         const Modal = document.getElementById("modal-cadastrar-empresa");
         Modal.style.display = "flex";
     });
@@ -13,58 +13,78 @@
         CriarTabelaEmpresas(DadosEmpresas);
     });
 
-    AbrirModalVisualizar.addEventListener("dblclick", (e)=>{
-        console.log(e.target);
+    AbrirModalVisualizar.addEventListener("dblclick", (e) => {
+        let campo = e.target;
+        let id = campo.parentNode.querySelector("div").id;
+        console.log(id);
+        AbrirModal(id, DadosEmpresas, "modal-visualizar-empresa");
     });
 
+    document.getElementById("zerar-parametrizacao").addEventListener("click", async(e) => {
+        e.preventDefault();
+        const resposta = confirm("Deseja realmente zerar os parâmetros?");
+        if (resposta) {
+            const resp = await ZerarParametrizacao(document.getElementById("id-parametrizacao").value);
+            if (resp.status === "ok") {
+                alert("Parâmetros zerados com sucesso!");
+                window.location
+            }
+        }
+    });
 
 })();
 
-async function AbrirModal(id) {
-    const Modal = document.getElementById("modal-visualizar-empresa");
-    Modal.style.display = "flex";
+async function AbrirModal(id, arrayDados, modal) {
 
-    try {
-        const response = await fetch(`../../src/href/routes.php?idVisualizarParametrizacao=${id}`);
-        const data = await response.json();
+    if (modal === 'modal-visualizar-empresa') {
 
-        if (data.status === "ok") {
-            const form = document.getElementById("form-empresa");
-            const inputs = form.querySelectorAll("input");
-           
-            const valores = [
-                data.msg.NomeEmpresa,
-                data.msg.Cpf_Cnpj_empresa,
-                data.msg.RazaoSocial,
-                data.msg.CpfCnpj,
-                data.msg.Email,
-                data.msg.Telefone,
-                data.msg.NomeResponsavel,
-                data.msg.usuario,
-                data.msg.ModeloCertificado,
-                data.msg.SenhaCertificado,
-                data.msg.JaEmitiuNFCe,
-                data.msg.JaEmitiuNFe,
-                data.msg.JaEmitiuSat,
-                data.msg.IraEmitirNFCe,
-                data.msg.IraEmitirNFe,
-                data.msg.IraEmitirSat,
-                data.msg.UltimaNFCe,
-                data.msg.UltimaNFe,
-            ];
-    
-            // Itera pelos inputs e pelos valores simultaneamente
-            inputs.forEach((input, index) => {
-                if (valores[index] !== undefined) {
-                    input.value = valores[index]; // Atribui o valor correspondente ao input
+        for (let i = 0; i < arrayDados.length; i++) {
+            if (arrayDados[i].id === id) {
+                try {
+
+                    const form = document.getElementById("form-empresa");
+                    const inputs = form.querySelectorAll("input");
+
+                    const valores = [
+                        arrayDados[i].id,
+                        arrayDados[i].NomeEmpresa,
+                        arrayDados[i].Cpf_Cnpj_empresa,
+                        arrayDados[i].RazaoSocial,
+                        arrayDados[i].CpfCnpj,
+                        arrayDados[i].Email,
+                        arrayDados[i].Telefone,
+                        arrayDados[i].NomeResponsavel,
+                        arrayDados[i].usuario,
+                        arrayDados[i].ModeloCertificado,
+                        arrayDados[i].SenhaCertificado,
+                        arrayDados[i].JaEmitiuNFCe,
+                        arrayDados[i].JaEmitiuNFe,
+                        arrayDados[i].JaEmitiuSat,
+                        arrayDados[i].IraEmitirNFCe,
+                        arrayDados[i].IraEmitirNFe,
+                        arrayDados[i].IraEmitirSat,
+                        arrayDados[i].UltimaNFCe,
+                        arrayDados[i].UltimaNFe,
+                    ];
+
+                    // Itera pelos inputs e pelos valores simultaneamente
+                    inputs.forEach((input, i) => {
+                        if (valores[i] !== undefined) {
+                            input.value = valores[i]; // Atribui o valor correspondente ao input
+                        }
+                    });
+
+                } catch (error) {
+                    console.error("Erro na requisição:", error);
                 }
-            });
-
-        } else {
-            console.error("Erro ao carregar os dados:", data.msg);
+            }
         }
-    } catch (error) {
-        console.error("Erro na requisição:", error);
+        const Modal = document.getElementById(modal);
+        Modal.style.display = "flex";
+
+    }else{
+        const Modal = document.getElementById(modal);
+        Modal.style.display = "flex";
     }
 }
 
@@ -80,16 +100,16 @@ async function BuscarEmpresas() {
         let DadosEmpresas = [];
         if (data.status === "ok") {
 
-            if (data.msg === "Não há registros"){
+            if (data.msg === "Não há registros") {
                 return "Não há registros";
-            }else{
+            } else {
                 for (let index = 0; index < data.msg.length; index++) {
                     DadosEmpresas.push(data.msg[index]);
                 }
 
                 return DadosEmpresas;
             }
-            
+
         } else {
             console.error("Erro ao carregar os dados:", data.msg);
         }
@@ -105,11 +125,11 @@ function CriarTabelaEmpresas(dados) {
     for (let index = 0; index < dados.length; index++) {
         let divRow = document.createElement("div");
         divRow.className = "table-row";
-        divRow.id = dados[index].id;
 
         let divNomeEmpresa = document.createElement("div");
         divNomeEmpresa.className = "table-cell";
         divNomeEmpresa.textContent = dados[index].NomeEmpresa;
+        divNomeEmpresa.id = dados[index].id;
 
         let divCpfCnpj = document.createElement("div");
         divCpfCnpj.className = "table-cell";
@@ -118,14 +138,14 @@ function CriarTabelaEmpresas(dados) {
         let divModoPreenchimento = document.createElement("div");
         divModoPreenchimento.className = "table-cell";
         let span = document.createElement("span");
-        if (dados[index].ModoPreenchimento == "CRIADO"){
+        if (dados[index].ModoPreenchimento == "CRIADO") {
             span.className = "falso";
-        }else if (dados[index].ModoPreenchimento == "PREENCHIDO"){
+        } else if (dados[index].ModoPreenchimento == "PREENCHIDO") {
             span.className = "intermediario";
-        }else if (dados[index].ModoPreenchimento == "FINALIZADO"){
+        } else if (dados[index].ModoPreenchimento == "FINALIZADO") {
             span.className = "verdadeiro";
         }
-        
+
         span.textContent = dados[index].ModoPreenchimento;
         divModoPreenchimento.appendChild(span);
 
@@ -135,5 +155,15 @@ function CriarTabelaEmpresas(dados) {
         divRow.appendChild(divCpfCnpj);
 
         divRow.appendChild(divModoPreenchimento);
+    }
+}
+
+async function ZerarParametrizacao(id) {
+    const response = await fetch(`../../src/href/routes.php?idZerarParametrizacao={$id}`);
+    const data = await response.json();
+    if (data.status === "ok") {
+        alerta('success', 'Parametrização zerada com sucesso!');
+    }else{
+        alerta('danger', 'Erro ao zerar a parametrização!');
     }
 }

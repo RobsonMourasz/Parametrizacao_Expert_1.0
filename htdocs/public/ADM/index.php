@@ -10,7 +10,8 @@
 </head>
 
 <body style="background-color: #f4f4f4;">
-
+    <div class="alert"><small></small>
+    </div> <!-- alert -->
     <div class="container">
         <div class="container-page">
             <div class="header">
@@ -88,50 +89,53 @@
             </div>
             <div class="modal-body">
                 <form action="" id="form-empresa" class="modal-form">
+                    
+                    <input type="number" name="id" id="id-parametrizacao" hidden>
+
                     <div class="group-input">
                         <label for="nome">Nome da Empresa</label>
-                        <input type="text" name="nome_empresa_cliente" id="nome_empresa_cliente" value="" readonly >
+                        <input type="text" name="nome_empresa_cliente" id="nome_empresa_cliente" value="" readonly>
                     </div>
                     <div class="group-input">
                         <label for="cnpj">CNPJ</label>
-                        <input type="text" name="cnpj_empresa_cliente" id="cnpj_empresa_cliente" value="" readonly >
+                        <input type="text" name="cnpj_empresa_cliente" id="cnpj_empresa_cliente" value="" readonly>
                     </div>
                     <div class="group-input">
                         <label for="status">Escritório</label>
-                        <input type="text" name="razao_escritorio" id="razao_escritorio" value="" readonly >
+                        <input type="text" name="razao_escritorio" id="razao_escritorio" value="" readonly>
                     </div>
                     <div class="group-input">
                         <label for="status">CPF ou CNPJ do escritório</label>
-                        <input type="text" name="cnpj_escritorio" id="cnpj_escritorio" value="" readonly >
+                        <input type="text" name="cnpj_escritorio" id="cnpj_escritorio" value="" readonly>
                     </div>
                     <div class="group-input">
                         <label for="status">Email do escritório</label>
-                        <input type="text" name="email_escritorio" id="email_escritorio" value="" readonly >
+                        <input type="text" name="email_escritorio" id="email_escritorio" value="" readonly>
                     </div>
                     <div class="group-input">
                         <label for="status">Telefone</label>
-                        <input type="text" name="telefone_escritorio" id="telefone_escritorio" value="" readonly >
+                        <input type="text" name="telefone_escritorio" id="telefone_escritorio" value="" readonly>
                     </div>
                     <div class="group-input">
                         <label for="status">Responsável por preencher</label>
-                        <input type="text" name="responsavel_escritorio" id="responsavel_escritorio" value="" readonly >
+                        <input type="text" name="responsavel_escritorio" id="responsavel_escritorio" value="" readonly>
                     </div>
                     <div class="group-input">
                         <label for="status">Usuario Expert</label>
-                        <input type="text" name="usuario_expert" id="usuario_expert" value="" readonly >
+                        <input type="text" name="usuario_expert" id="usuario_expert" value="" readonly>
                     </div>
 
                     <div class="row">
                         <div class="col">
                             <div class="group-input">
                                 <label for="status">Modelo Certificado</label>
-                                <input type="text" name="modelo_certificado" id="modelo_certificado" value="" readonly >
+                                <input type="text" name="modelo_certificado" id="modelo_certificado" value="" readonly>
                             </div>
                         </div>
                         <div class="col">
                             <div class="group-input">
                                 <label for="status">Senha</label>
-                                <input type="text" name="senha_certificado" id="senha_certificado" value="" readonly >
+                                <input type="text" name="senha_certificado" id="senha_certificado" value="" readonly>
                             </div>
                         </div>
                     </div>
@@ -141,19 +145,19 @@
                         <div class="col">
                             <div class="group-input">
                                 <label for="status">Já emitiu NFC-e ?</label>
-                                <input type="text" name="ja_emitiu_nfce" id="ja_emitiu_nfce" value="" readonly >
+                                <input type="text" name="ja_emitiu_nfce" id="ja_emitiu_nfce" value="" readonly>
                             </div>
                         </div>
                         <div class="col">
                             <div class="group-input">
                                 <label for="status">Já emitiu NF-e ?</label>
-                                <input type="text" name="ja_emitiu_nfe" id="ja_emitiu_nfe" value="" readonly >
+                                <input type="text" name="ja_emitiu_nfe" id="ja_emitiu_nfe" value="" readonly>
                             </div>
                         </div>
                         <div class="col">
                             <div class="group-input">
                                 <label for="status">Já emitiu SAT ?</label>
-                                <input type="text" name="ja_emitiu_sat" id="ja_emitiu_sat" value="" readonly >
+                                <input type="text" name="ja_emitiu_sat" id="ja_emitiu_sat" value="" readonly>
                             </div>
                         </div>
                     </div>
@@ -162,19 +166,19 @@
                         <div class="col">
                             <div class="group-input">
                                 <label for="status">Vai emitir NFC-e ?</label>
-                                <input type="text" name="vai_emitir_nfce" id="vai_emitir_nfce" value="" readonly >
+                                <input type="text" name="vai_emitir_nfce" id="vai_emitir_nfce" value="" readonly>
                             </div>
                         </div>
                         <div class="col">
                             <div class="group-input">
                                 <label for="status">Vai emitir NF-e ?</label>
-                                <input type="text" name="vai_emitir_nfe" id="vai_emitir_nfe" value="" readonly >
+                                <input type="text" name="vai_emitir_nfe" id="vai_emitir_nfe" value="" readonly>
                             </div>
                         </div>
                         <div class="col">
                             <div class="group-input">
                                 <label for="status">Vai emitir SAT ?</label>
-                                <input type="text" name="vai_emitir_sat" id="vai_emitir_sat" value="" readonly >
+                                <input type="text" name="vai_emitir_sat" id="vai_emitir_sat" value="" readonly>
                             </div>
                         </div>
                     </div>
@@ -183,13 +187,13 @@
                         <div class="col">
                             <div class="group-input">
                                 <label for="status">Ultima NFC-e ?</label>
-                                <input type="text" name="ultima_nfce" id="ultima_nfce" value="" readonly >
+                                <input type="text" name="ultima_nfce" id="ultima_nfce" value="" readonly>
                             </div>
                         </div>
                         <div class="col">
                             <div class="group-input">
                                 <label for="status">Ultima NF-e ?</label>
-                                <input type="text" name="ultima_nfe" id="ultima_nfe" value="" readonly >
+                                <input type="text" name="ultima_nfe" id="ultima_nfe" value="" readonly>
                             </div>
                         </div>
                     </div>
@@ -198,7 +202,7 @@
 
             <div class="modal-footer">
                 <div class="group-botoes">
-                    <button class="btn btn-success">Zerar parametrização</button>
+                    <button class="btn btn-success" id="zerar-parametrizacao">Zerar parametrização</button>
                 </div>
 
             </div>

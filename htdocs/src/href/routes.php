@@ -120,3 +120,11 @@ if (isset($_GET['idVisualizarParametrizacao']) && !empty($_GET['idVisualizarPara
 
 }
 
+if (isset($_GET['idZerarParametrizacao']) && !empty($_GET['idZerarParametrizacao'])){
+    $id = intval(limpar_texto($_GET['idZerarParametrizacao']));
+    $conexao = new Conexao();
+    $res = $conexao->ExecutarSql("UPDATE mv_parametrizacao SET ModeloCertificado = NULL, SenhaCertificado = NULL, RegimeTributario = NULL, IraEmitirNFCe = NULL, IraEmitirNFe = NULL, IraEmitirSat = NULL, JaEmitiuNFCe = NULL, JaEmitiuNFe = NULL, JaEmitiuSat = NULL,UltimaNFCe = NULL, UltimaNFe = NULL, ModoPreenchimento = 'CRIADO' WHERE id = $id");
+
+    echo json_encode(["status" => "ok", "msg" => $res]);
+}
+
