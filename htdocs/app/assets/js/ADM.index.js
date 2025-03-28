@@ -17,7 +17,6 @@
     document.getElementById("adicionar-parametrizacao").addEventListener("click", async (e) => {
         e.preventDefault();
         DadosEmpresas = await BuscarEmpresas();
-        console.log(DadosEmpresas.msg);
         if (DadosEmpresas) {
             PreenchimentoBuscaEmpresa(DadosEmpresas.msg);
         }
@@ -27,6 +26,7 @@
         let select = e.target;
         let input = document.getElementById("form-empresa-nome");
         input.value = select.textContent;
+        document.getElementById("form-empresa-cnpj").value = FormatarCpfCnpj(select.getAttribute("cnpj"));
         document.querySelector(".list-empresa").style.display = "none";
     });
 
@@ -222,6 +222,7 @@ async function PreenchimentoBuscaEmpresa(valores) {
     for (let index = 0; index < valores.length; index++) {
         let li = document.createElement("li");
         li.textContent = valores[index].NomeEmpresa;
+        li.setAttribute("cnpj", valores[index].Cpf_Cnpj);
         li.classList.add("list-item");
         list.appendChild(li);
     }
