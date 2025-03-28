@@ -228,7 +228,11 @@
                 <form action="" id="form-empresa" class="modal-form">
                     <div class="group-input">
                         <label for="nome">Nome da Empresa</label>
-                        <input type="text" name="nome" id="nome">
+                        <input type="text" name="nome" id="form-empresa-nome">
+                        <div class="list-empresa">
+                            <ul class="list" id="list-empresa">
+                            </ul> <!-- list -->
+                        </div>
                     </div>
                     <div class="group-input">
                         <label for="cnpj">CNPJ</label>

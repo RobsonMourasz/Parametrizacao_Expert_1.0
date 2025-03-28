@@ -131,3 +131,9 @@ if (isset($_GET['idZerarParametrizacao']) && !empty($_GET['idZerarParametrizacao
     echo json_encode(["status" => "ok", "msg" => $res]);
 }
 
+
+if (isset($_GET['Empresas']) && !empty($_GET['Empresas'])){
+    $conexao = new Conexao();
+    $res = $conexao->ExecutarSql("SELECT * FROM cadempresa");
+    echo json_encode(["status" => "ok", "msg" => $res]);
+}
