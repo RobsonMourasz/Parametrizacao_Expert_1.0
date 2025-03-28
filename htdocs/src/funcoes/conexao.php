@@ -3,6 +3,7 @@
 namespace HTDOCS\funcoes;
 
 use mysqli;
+use Exception;
 
 class Conexao
 {
@@ -25,23 +26,24 @@ class Conexao
         }
     }
 
-    public function ExecutarSql($sql){
+    public function ExecutarSql($sql)
+    {
         $result = $this->conexao->query($sql);
 
-        if ($result){
+        if ($result) {
 
             if ($result->num_rows > 0) {
                 return $result->fetch_all(MYSQLI_ASSOC);
-            }else{
+            } else {
                 return "Não há registros";
             }
-
         } else {
             return "ERRO";
         }
     }
 
-    public function Cadastrar($sql, $params) {
+    public function Cadastrar($sql, $params)
+    {
         // Prepara a consulta
         $stmt = $this->conexao->prepare($sql);
 
@@ -59,6 +61,43 @@ class Conexao
             return true;
         } else {
             return $stmt->error;
+        }
+    }
+
+    public function UpdateSQL($sql, $params)
+    {
+        $stmt = $this->conexao->prepare($sql);
+
+        if (!$stmt) {
+            throw new Exception("Erro na preparação do SQL: " . $this->conexao->error);
+        }
+
+        // Criação dinâmica de tipos e parâmetros
+        if (!empty($params)) {
+            $tipos = ''; // String que define os tipos dos parâmetros
+
+            // Determina os tipos de cada parâmetro
+            foreach ($params as $param) {
+                if (is_int($param)) {
+                    $tipos .= 'i'; // Inteiro
+                } elseif (is_float($param)) {
+                    $tipos .= 'd'; // Decimal
+                } elseif (is_string($param)) {
+                    $tipos .= 's'; // String
+                } else {
+                    $tipos .= 'b'; // Blob (binário)
+                }
+            }
+
+            // Vincula os parâmetros dinamicamente
+            $stmt->bind_param($tipos, ...$params);
+        }
+
+        // Executa o SQL
+        if ($stmt->execute()) {
+            return "Query executada com sucesso!";
+        } else {
+            throw new Exception("Erro ao executar a query: " . $stmt->error);
         }
     }
 }

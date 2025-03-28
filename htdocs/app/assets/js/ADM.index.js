@@ -25,9 +25,12 @@
         const resposta = confirm("Deseja realmente zerar os parâmetros?");
         if (resposta) {
             const resp = await ZerarParametrizacao(document.getElementById("id-parametrizacao").value);
-            if (resp.status === "ok") {
-                alert("Parâmetros zerados com sucesso!");
-                window.location
+            if (resp) {
+                alerta('success', 'Parametrização zerada com sucesso!');
+                DadosEmpresas = await BuscarEmpresas();
+                CriarTabelaEmpresas(DadosEmpresas);
+            }else{
+                alerta('danger', 'Erro ao zerar a parametrização!');
             }
         }
     });
@@ -159,11 +162,11 @@ function CriarTabelaEmpresas(dados) {
 }
 
 async function ZerarParametrizacao(id) {
-    const response = await fetch(`../../src/href/routes.php?idZerarParametrizacao={$id}`);
+    const response = await fetch(`../../src/href/routes.php?idZerarParametrizacao=${id}`);
     const data = await response.json();
     if (data.status === "ok") {
-        alerta('success', 'Parametrização zerada com sucesso!');
+        return true;
     }else{
-        alerta('danger', 'Erro ao zerar a parametrização!');
+        return false;
     }
 }

@@ -153,21 +153,3 @@ function acrescentarMes($data, $qtdMes) {
     }
 }
 
-// Função para calcular a diferença em meses até 31-12-2050
-function mesesAte2050() {
-    // Data atual
-    $dataAtual = new DateTime();
-    
-    // Data alvo (31-12-2050)
-    $dataAlvo = new DateTime('2050-12-31');
-    
-    // Calcula a diferença entre as datas
-    $diferenca = $dataAtual->diff($dataAlvo);
-    
-    // Calcula os meses totais de diferença
-    $mesesRestantes = ($diferenca->y * 12) + $diferenca->m;
-    
-    return $mesesRestantes +1;
-}
-
-
