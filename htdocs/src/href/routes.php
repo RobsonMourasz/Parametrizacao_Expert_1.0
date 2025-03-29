@@ -137,3 +137,13 @@ if (isset($_GET['Empresas']) && !empty($_GET['Empresas'])){
     $res = $conexao->ExecutarSql("SELECT * FROM cadempresa");
     echo json_encode(["status" => "ok", "msg" => $res]);
 }
+
+
+if (isset($_GET['idGerarLinkParametrizacao']) && !empty($_GET['idGerarLinkParametrizacao'])) {
+    $id = intval(limpar_texto($_GET['idGerarLinkParametrizacao']));
+    $conexao = new Conexao();
+    $res = $conexao->Cadastrar("INSERT INTO mv_parametrizacao VALUE (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,NOW(),NOW())", ['ssssssssssssss', [$id] ]
+    );
+
+    echo json_encode(["status" => "ok", "msg" => $res]);
+}

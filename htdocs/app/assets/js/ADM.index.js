@@ -27,6 +27,7 @@
         let input = document.getElementById("form-empresa-nome");
         input.value = select.textContent;
         document.getElementById("form-empresa-cnpj").value = FormatarCpfCnpj(select.getAttribute("cnpj"));
+        document.getElementById("idEmpresa").value = select.getAttribute("id")
         document.querySelector(".list-empresa").style.display = "none";
     });
 
@@ -63,6 +64,18 @@
             } else {
                 alerta('danger', 'Erro ao zerar a parametrização!');
             }
+        }
+    });
+
+    document.getElementById("gerar-link-parametrizacao").addEventListener("click", async (e) => {
+        e.preventDefault();
+        const idEmpresa = document.getElementById("idEmpresa").value;
+        
+        const response = await fetch(`../../src/href/routes.php?idGerarLinkParametrizacao=${idEmpresa}`);
+        if (response.ok) {
+            document.getElementById("link").value = await response.text();
+        } else {
+            alerta('danger', 'Erro ao gerar o link!');
         }
     });
 
@@ -223,6 +236,7 @@ async function PreenchimentoBuscaEmpresa(valores) {
         let li = document.createElement("li");
         li.textContent = valores[index].NomeEmpresa;
         li.setAttribute("cnpj", valores[index].Cpf_Cnpj);
+        li.setAttribute("id", valores[index].id);
         li.classList.add("list-item");
         list.appendChild(li);
     }

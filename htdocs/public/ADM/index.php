@@ -226,6 +226,7 @@
             </div>
             <div class="modal-body">
                 <form action="" id="form-empresa" class="modal-form">
+                    <input type="number" name="idEmpresa" id="idEmpresa" hidden>
                     <div class="group-input">
                         <label for="nome">Nome da Empresa</label>
                         <input type="text" name="nome" id="form-empresa-nome">
@@ -240,7 +241,7 @@
                     </div>
                     <div class="group-input">
                         <label for="status">link</label>
-                        <input type="text" name="status" id="status">
+                        <input type="text" name="link" id="link" readonly>
                     </div>
                 </form>
             </div>
@@ -248,7 +249,7 @@
             <div class="modal-footer">
                 <div class="group-botoes">
                     <button class="btn btn-primary">Cancelar</button>
-                    <button class="btn btn-success">Salvar</button>
+                    <button class="btn btn-success" id="gerar-link-parametrizacao">Gerar Link</button>
                 </div>
 
             </div>
