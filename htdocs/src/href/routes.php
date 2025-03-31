@@ -141,9 +141,14 @@ if (isset($_GET['Empresas']) && !empty($_GET['Empresas'])){
 
 if (isset($_GET['idGerarLinkParametrizacao']) && !empty($_GET['idGerarLinkParametrizacao'])) {
     $id = intval(limpar_texto($_GET['idGerarLinkParametrizacao']));
-    $conexao = new Conexao();
-    $res = $conexao->Cadastrar("INSERT INTO mv_parametrizacao VALUE (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,NOW(),NOW())", ['ssssssssssssss', [$id] ]
-    );
+    try {
+        $conexao = new Conexao();
+        $res = $conexao->Cadastrar("INSERT INTO mv_parametrizacao VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,NOW(),NOW(),?)", ['iiiissssssssssss', NULL, 0, $id, $_SESSION['idUsuario'], NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "CRIADO"]);
 
-    echo json_encode(["status" => "ok", "msg" => $res]);
+        $temp = $conexao->GetUltimoId("mv_parametrizacao");
+        $id = intval($temp);
+        echo json_encode(["status" => "ok", "msg" => $id]);
+    } catch (\Throwable $th) {
+        echo json_encode(["status" => "erro", "msg" => $th->getMessage()]);
+    }
 }

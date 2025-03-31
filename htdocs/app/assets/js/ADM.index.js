@@ -73,7 +73,12 @@
         
         const response = await fetch(`../../src/href/routes.php?idGerarLinkParametrizacao=${idEmpresa}`);
         if (response.ok) {
-            document.getElementById("link").value = await response.text();
+            const responseRetorno = await response.json();
+            if (responseRetorno.status === "ok") {
+                const idLink = responseRetorno.msg
+                document.getElementById("link").value = "";
+            }
+            alerta("success",'Link gerado com sucesso!');
         } else {
             alerta('danger', 'Erro ao gerar o link!');
         }

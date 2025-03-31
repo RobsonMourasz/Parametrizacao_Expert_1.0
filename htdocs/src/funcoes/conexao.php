@@ -100,4 +100,8 @@ class Conexao
             throw new Exception("Erro ao executar a query: " . $stmt->error);
         }
     }
+
+    public function GetUltimoId(string $tabela){
+        return $this->ExecutarSql("SELECT MAX(id) as id FROM $tabela");
+    }
 }
