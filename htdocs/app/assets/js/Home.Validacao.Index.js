@@ -1,4 +1,13 @@
 (()=>{
+
+    document.addEventListener("DOMContentLoaded", async()=>{
+        const idEmpresa = window.location.href.split("=")[1];
+        const BuscaDadosEmpresa = await fetch(`../../src/href/routes.php?PreencherEmpresa${idEmpresa}`)
+        const FormInputs = document.getElementById("form-cadastro-escritorio");
+        const Inputs = new FormData(FormInputs);
+        console.log(Inputs);
+    });
+
     document.getElementById("form-cadastro-escritorio").addEventListener("submit", async(event)=>{
         event.preventDefault();
         const inputs = new FormData(document.getElementById("form-cadastro-escritorio"));

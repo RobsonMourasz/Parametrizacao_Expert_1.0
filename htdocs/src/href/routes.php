@@ -152,3 +152,10 @@ if (isset($_GET['idGerarLinkParametrizacao']) && !empty($_GET['idGerarLinkParame
         echo json_encode(["status" => "erro", "msg" => $th->getMessage()]);
     }
 }
+
+if (isset($_GET['PreencherEmpresa']) && !empty($_GET['PreencherEmpresa'])){
+    $id = intval(limpar_texto($_GET['PreencherEmpresa']));
+    $conexao = new Conexao();
+    $res = $conexao->ExecutarSql("SELECT * FROM cadempresa WHERE id = $id");
+    echo json_encode(["status" => "ok", "msg" => $res]);
+}

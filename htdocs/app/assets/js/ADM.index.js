@@ -70,15 +70,19 @@
     document.getElementById("gerar-link-parametrizacao").addEventListener("click", async (e) => {
         e.preventDefault();
         const idEmpresa = document.getElementById("idEmpresa").value;
-        
+
         const response = await fetch(`../../src/href/routes.php?idGerarLinkParametrizacao=${idEmpresa}`);
         if (response.ok) {
             const responseRetorno = await response.json();
             if (responseRetorno.status === "ok") {
                 const idLink = responseRetorno.msg
-                document.getElementById("link").value = "";
+                const raiz = window.location.origin;
+                let path = window.location.pathname;
+                path = path.replace("/index.php", "");
+                path = path.replace("/ADM", "");
+                document.getElementById("link").value = `${raiz}${path}/user/index.php?empresa=${idLink}`;
             }
-            alerta("success",'Link gerado com sucesso!');
+            alerta("success", 'Link gerado com sucesso!');
         } else {
             alerta('danger', 'Erro ao gerar o link!');
         }
@@ -173,40 +177,53 @@ async function BuscarParametrizacao() {
 function CriarTabelaEmpresas(dados) {
     let tbody = document.getElementById("table-body-empresas");
     tbody.innerHTML = ""; // Limpa o conteúdo anterior
+    console.log(dados);
+    if (dados != "Não há registros") {
+        for (let index = 0; index < dados.length; index++) {
+            let divRow = document.createElement("div");
+            divRow.className = "table-row";
 
-    for (let index = 0; index < dados.length; index++) {
+            let divNomeEmpresa = document.createElement("div");
+            divNomeEmpresa.className = "table-cell";
+            divNomeEmpresa.textContent = dados[index].NomeEmpresa;
+            divNomeEmpresa.id = dados[index].id;
+
+            let divCpfCnpj = document.createElement("div");
+            divCpfCnpj.className = "table-cell";
+            divCpfCnpj.textContent = FormatarCpfCnpj(dados[index].Cpf_Cnpj_empresa);
+
+            let divModoPreenchimento = document.createElement("div");
+            divModoPreenchimento.className = "table-cell";
+            let span = document.createElement("span");
+            if (dados[index].ModoPreenchimento == "CRIADO") {
+                span.className = "falso";
+            } else if (dados[index].ModoPreenchimento == "PREENCHIDO") {
+                span.className = "intermediario";
+            } else if (dados[index].ModoPreenchimento == "FINALIZADO") {
+                span.className = "verdadeiro";
+            }
+
+            span.textContent = dados[index].ModoPreenchimento;
+            divModoPreenchimento.appendChild(span);
+
+            // Adiciona os elementos ao tbody
+            tbody.appendChild(divRow);
+            divRow.appendChild(divNomeEmpresa);
+            divRow.appendChild(divCpfCnpj);
+
+            divRow.appendChild(divModoPreenchimento);
+        }
+    } else {
         let divRow = document.createElement("div");
         divRow.className = "table-row";
+        divRow.className = "center";
 
         let divNomeEmpresa = document.createElement("div");
         divNomeEmpresa.className = "table-cell";
-        divNomeEmpresa.textContent = dados[index].NomeEmpresa;
-        divNomeEmpresa.id = dados[index].id;
+        divNomeEmpresa.textContent = "Não há registros";
 
-        let divCpfCnpj = document.createElement("div");
-        divCpfCnpj.className = "table-cell";
-        divCpfCnpj.textContent = FormatarCpfCnpj(dados[index].Cpf_Cnpj_empresa);
-
-        let divModoPreenchimento = document.createElement("div");
-        divModoPreenchimento.className = "table-cell";
-        let span = document.createElement("span");
-        if (dados[index].ModoPreenchimento == "CRIADO") {
-            span.className = "falso";
-        } else if (dados[index].ModoPreenchimento == "PREENCHIDO") {
-            span.className = "intermediario";
-        } else if (dados[index].ModoPreenchimento == "FINALIZADO") {
-            span.className = "verdadeiro";
-        }
-
-        span.textContent = dados[index].ModoPreenchimento;
-        divModoPreenchimento.appendChild(span);
-
-        // Adiciona os elementos ao tbody
-        tbody.appendChild(divRow);
         divRow.appendChild(divNomeEmpresa);
-        divRow.appendChild(divCpfCnpj);
-
-        divRow.appendChild(divModoPreenchimento);
+        tbody.appendChild(divRow);
     }
 }
 

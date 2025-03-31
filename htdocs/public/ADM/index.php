@@ -229,7 +229,7 @@
                     <input type="number" name="idEmpresa" id="idEmpresa" hidden>
                     <div class="group-input">
                         <label for="nome">Nome da Empresa</label>
-                        <input type="text" name="nome" id="form-empresa-nome">
+                        <input type="text" name="nome" id="form-empresa-nome" autocomplete="off">
                         <div class="list-empresa">
                             <ul class="list" id="list-empresa">
                             </ul> <!-- list -->
@@ -237,7 +237,7 @@
                     </div>
                     <div class="group-input">
                         <label for="cnpj">CNPJ</label>
-                        <input type="text" name="cnpj" id="form-empresa-cnpj">
+                        <input type="text" name="cnpj" id="form-empresa-cnpj" autocomplete="off">
                     </div>
                     <div class="group-input">
                         <label for="status">link</label>
