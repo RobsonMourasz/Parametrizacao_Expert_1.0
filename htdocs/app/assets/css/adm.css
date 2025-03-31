@@ -174,11 +174,15 @@
 
 .list-empresa .list{
     text-align: center;
+    display: flex;
+    width: 100%;
 }
 
 .list-empresa .list .list-item{
+    display: flex;
+    width: 100%;
     color: white;
-    padding: .5em 0;
+    padding: .5em;
     border-bottom: 1px solid #00ff55;
     cursor: pointer;
     user-select: none;

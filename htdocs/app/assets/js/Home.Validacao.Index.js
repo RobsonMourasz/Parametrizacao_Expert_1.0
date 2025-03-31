@@ -2,10 +2,14 @@
 
     document.addEventListener("DOMContentLoaded", async()=>{
         const idEmpresa = window.location.href.split("=")[1];
-        const BuscaDadosEmpresa = await fetch(`../../src/href/routes.php?PreencherEmpresa${idEmpresa}`)
-        const FormInputs = document.getElementById("form-cadastro-escritorio");
-        const Inputs = new FormData(FormInputs);
-        console.log(Inputs);
+        const BuscaDadosEmpresa = await fetch(`../../src/href/routes.php?PreencherEmpresa=${idEmpresa}`)
+        if (BuscaDadosEmpresa.ok){
+            const dadosEmpresa = await BuscaDadosEmpresa.json();
+            const empresa = await fetch(`../../src/href/routes.php?Empresas=${dadosEmpresa.msg[0].IdEmpresa}`)
+            const respEmpresa = await empresa.json();
+            alerta("success", `Preencha a parametrização referente a empresa : ${respEmpresa.msg[0].NomeEmpresa}`);
+        }
+
     });
 
     document.getElementById("form-cadastro-escritorio").addEventListener("submit", async(event)=>{
@@ -31,9 +35,11 @@
         })
 
         if (CadastrarEscritorio.ok){
+            const resp = await CadastrarEscritorio.json();
+            console.log(resp);
             alerta("success","Escritorio cadastrado com sucesso")
-            limparInputs("form-cadastro-escritorio")
-            window.location.assign("?page=ModeloCertificado");
+            //limparInputs("form-cadastro-escritorio")
+            //window.location.assign("?page=ModeloCertificado");
         }else{
             alerta("danger","Erro ao cadastrar escritorio")
         }

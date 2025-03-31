@@ -11,27 +11,41 @@ if (!isset($_SESSION)) {
 
 /* CADASTRO DA EMPRESA DO CONTADOR */
 if(isset($_POST['tipo']) && $_POST['tipo'] == "CadEscritorio"){
-
     $razao = filter_input(INPUT_POST, 'razao', FILTER_SANITIZE_SPECIAL_CHARS);
     $cpf_cnpj = limpar_texto(filter_input(INPUT_POST, 'cpf_cnpj', FILTER_SANITIZE_SPECIAL_CHARS));
     $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
     $nome_responsavel = filter_input(INPUT_POST, 'nome_responsavel', FILTER_SANITIZE_SPECIAL_CHARS);
     $telefone = limpar_texto(filter_input(INPUT_POST, 'telefone', FILTER_SANITIZE_SPECIAL_CHARS));
+    $idParametrizacao = $_SESSION['idParametrizacao'];
     $_SESSION['cpf_cnpj'] = $cpf_cnpj;
     $_SESSION['email'] = $email;
     $conexao = new Conexao();
-    
-    $Resposta = $conexao->ExecutarSql("SELECT * FROM cadcontador WHERE CpfCnpj = $cpf_cnpj AND NomeResponsavel LIKE '%$nome_responsavel%'");
-    if($Resposta == "Não há registros"){
+
+    $JaCadastrado = $conexao->ExecutarSql("SELECT * FROM cadcontador WHERE CpfCnpj = '$cpf_cnpj'");
+    var_dump($JaCadastrado);
+    die();
+    if(count($JaCadastrado) == 0){
 
         $SqlInsert = "INSERT cadcontador (RazaoSocial, CpfCnpj, Email, NomeResponsavel, Telefone, DataCadastro, Modificacao) VALUES (?,?,?,?,?,NOW(),NOW())";
         $Variaveis = ['sssss',$razao,$cpf_cnpj,$email,$nome_responsavel,$telefone];
+        if($conexao->Cadastrar($SqlInsert, $Variaveis)){
+            $novoID = $conexao->GetUltimoId("cadcontador");
+        }
 
     }
-    if($conexao->Cadastrar($SqlInsert, $Variaveis)){
-        echo json_encode(["status" => "ok", "msg" => "Cadastrado com sucesso!"]);
-    }else{
-        json_encode(["status" => "erro", "msg" => "Erro ao inserir a empresa"]);
+
+    try {
+        if(isset($novoID)){
+            $sqlUpdate = "UPDATE mv_parametrizacao SET IdContador = ? WHERE id = ?";
+            $Variaveis = ['ii',$novoID,$idParametrizacao];
+        }else{
+            $sqlUpdate = "UPDATE mv_parametrizacao SET IdContador = ? WHERE id = ?";
+            $Variaveis = ['ii',$JaCadastrado[0]["idContador"],$idParametrizacao];
+        }
+        echo json_encode(["status" => "ok", "msg" => $JaCadastrado]);
+        die();
+    } catch (\Throwable $th) {
+        json_encode(["status" => "erro", "msg" => "Erro ao inserir a empresa ".$th->getMessage()]);
     }
 
 }
@@ -133,9 +147,17 @@ if (isset($_GET['idZerarParametrizacao']) && !empty($_GET['idZerarParametrizacao
 
 
 if (isset($_GET['Empresas']) && !empty($_GET['Empresas'])){
-    $conexao = new Conexao();
-    $res = $conexao->ExecutarSql("SELECT * FROM cadempresa");
-    echo json_encode(["status" => "ok", "msg" => $res]);
+    if ($_GET['Empresas'] === "todos") {
+        $conexao = new Conexao();
+        $res = $conexao->ExecutarSql("SELECT * FROM cadempresa");
+        echo json_encode(["status" => "ok", "msg" => $res]);
+    }else{
+        $id = intval(limpar_texto($_GET['Empresas']));
+        $conexao = new Conexao();
+        $res = $conexao->ExecutarSql("SELECT * FROM cadempresa WHERE id = $id");
+        echo json_encode(["status" => "ok", "msg" => $res]);
+    }
+
 }
 
 
@@ -156,6 +178,7 @@ if (isset($_GET['idGerarLinkParametrizacao']) && !empty($_GET['idGerarLinkParame
 if (isset($_GET['PreencherEmpresa']) && !empty($_GET['PreencherEmpresa'])){
     $id = intval(limpar_texto($_GET['PreencherEmpresa']));
     $conexao = new Conexao();
-    $res = $conexao->ExecutarSql("SELECT * FROM cadempresa WHERE id = $id");
+    $res = $conexao->ExecutarSql("SELECT * FROM mv_parametrizacao WHERE IdEmpresa = $id ORDER BY id DESC  LIMIT 1");
+    $_SESSION['idParametrizacao'] = $res[0]['id'];
     echo json_encode(["status" => "ok", "msg" => $res]);
 }
