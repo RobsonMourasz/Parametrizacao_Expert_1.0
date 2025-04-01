@@ -66,17 +66,17 @@ class Conexao
 
     public function UpdateSQL($sql, $params)
     {
+        // Prepara a consulta
         $stmt = $this->conexao->prepare($sql);
-
+    
         if (!$stmt) {
             throw new Exception("Erro na preparação do SQL: " . $this->conexao->error);
         }
-
-        // Criação dinâmica de tipos e parâmetros
+    
+        // Verifica se há parâmetros para vincular
         if (!empty($params)) {
+            // Determina os tipos dos parâmetros dinamicamente
             $tipos = ''; // String que define os tipos dos parâmetros
-
-            // Determina os tipos de cada parâmetro
             foreach ($params as $param) {
                 if (is_int($param)) {
                     $tipos .= 'i'; // Inteiro
@@ -88,14 +88,14 @@ class Conexao
                     $tipos .= 'b'; // Blob (binário)
                 }
             }
-
+    
             // Vincula os parâmetros dinamicamente
             $stmt->bind_param($tipos, ...$params);
         }
-
+    
         // Executa o SQL
         if ($stmt->execute()) {
-            return "Query executada com sucesso!";
+            return true;
         } else {
             throw new Exception("Erro ao executar a query: " . $stmt->error);
         }

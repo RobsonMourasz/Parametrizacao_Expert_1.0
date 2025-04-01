@@ -18,7 +18,7 @@
         e.preventDefault();
         DadosEmpresas = await BuscarEmpresas();
         if (DadosEmpresas) {
-            PreenchimentoBuscaEmpresa(DadosEmpresas.msg);
+            PreenchimentoBuscaEmpresa(DadosEmpresas);
         }
     });
 
@@ -48,7 +48,7 @@
         let campo = e.target;
         let id = campo.parentNode.querySelector("div").id;
         if (id !== undefined && id !== "" && id !== null && id !== 0) {
-            AbrirModal(id, DadosParametrizacao, "modal-visualizar-empresa");
+            AbrirModal(id, BuscarParametrizacao(id), "modal-visualizar-empresa");
         }
     });
 
@@ -59,7 +59,7 @@
             const resp = await ZerarParametrizacao(document.getElementById("id-parametrizacao").value);
             if (resp) {
                 alerta('success', 'Parametrização zerada com sucesso!');
-                DadosParametrizacao = await BuscarParametrizacao();
+                DadosParametrizacao = await BuscarParametrizacao("");
                 CriarTabelaEmpresas(DadosParametrizacao);
             } else {
                 alerta('danger', 'Erro ao zerar a parametrização!');
@@ -149,9 +149,14 @@ function FecharModal(id) {
     Modal.style.display = "none";
 }
 
-async function BuscarParametrizacao() {
+async function BuscarParametrizacao(id) {
     try {
-        const response = await fetch(`../../src/href/routes.php?idVisualizarParametrizacao=todos`);
+        if (id == ""){
+            id = "todos"
+        }else{
+            id = parseInt(id);
+        }
+        const response = await fetch(`../../src/href/routes.php?idVisualizarParametrizacao=${id}`);
         const data = await response.json();
         let DadosParametrizacao = [];
         if (data.status === "ok") {
@@ -242,7 +247,7 @@ async function BuscarEmpresas() {
     const ResEmpresas = await Empresas.json();
     if (ResEmpresas.status === "ok") {
         if (ResEmpresas.msg.length > 0) {
-            return ResEmpresas;
+            return ResEmpresas.msg;
         } else {
             return false;
         }

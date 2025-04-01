@@ -62,11 +62,13 @@
         if (document.getElementById("nfce-emitida-sim").checked && document.getElementById("ultima_nfce").value == "") {
             alerta("danger", "Preencha qual a ultima NFC-e emitida!");
             document.getElementById("ultima_nfce").focus();
+            return; // Interrompe a execução se nenhum botão foi marcado
         }
 
         if (document.getElementById("nfe-emitida-sim").checked && document.getElementById("ultima_nfe").value == "") {
             alerta("danger", "Preencha qual a ultima NFC-e emitida!");
             document.getElementById("ultima_nfe").focus();
+            return; // Interrompe a execução se nenhum botão foi marcado
         }
 
         const formData = new FormData(document.getElementById("form-cadastro-tipo-fiscal"));

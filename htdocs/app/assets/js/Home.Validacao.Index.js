@@ -36,10 +36,8 @@
 
         if (CadastrarEscritorio.ok){
             const resp = await CadastrarEscritorio.json();
-            console.log(resp);
             alerta("success","Escritorio cadastrado com sucesso")
-            //limparInputs("form-cadastro-escritorio")
-            //window.location.assign("?page=ModeloCertificado");
+            window.location.assign("?page=ModeloCertificado");
         }else{
             alerta("danger","Erro ao cadastrar escritorio")
         }
