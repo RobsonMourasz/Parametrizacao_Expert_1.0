@@ -86,6 +86,14 @@
     cursor: pointer;
 }
 
+.table-cell:nth-child(4){
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+    cursor: pointer;
+}
+
 .table-row{
     padding: .5em 1em;
 }
@@ -192,6 +200,30 @@
 .list-empresa .list .list-item:hover{
     background-color: #27ae60;
 }   
+
+.copy-link{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: .5em 0;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.copy-link::after{
+    content: "";
+    background-image: url(../img/copy.svg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    width: 15px;
+    height: 15px;
+    margin-left: 10px;
+    transition: .3s;
+}
 
 @media screen and (max-width: 1050px){
     .table-body .table-cell span{

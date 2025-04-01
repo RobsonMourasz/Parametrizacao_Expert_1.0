@@ -63,7 +63,7 @@
                             <div class="table-cell">Nome Empresa</div>
                             <div class="table-cell">CNPJ</div>
                             <div class="table-cell">Status</div>
-                            <div class="table-cell">Ação</div>
+                            <div class="table-cell">Gerar Link</div>
                         </div> <!-- table-row -->
                     </div> <!-- table-header -->
 

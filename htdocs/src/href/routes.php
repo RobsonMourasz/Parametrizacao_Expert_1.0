@@ -95,6 +95,17 @@ if (isset($_POST['tipo']) && $_POST['tipo'] == "CadCertificado") {
 /* CADASTRAR TIPO DE REGIME TRIBUTARIO */
 if (isset($_POST['tipo']) && $_POST['tipo'] == "CadRegimeTributario") {
     $regime_tributario = filter_input(INPUT_POST, 'RegimeTributario', FILTER_SANITIZE_SPECIAL_CHARS);
+    if ($regime_tributario == "cad_regime_mei") {
+        $regime_tributario = "MEI";
+    } else if ($regime_tributario == "cad_regime_simples") {
+        $regime_tributario = "Simples Nacional";
+    } else if ($regime_tributario == "cad_regime_real") {
+        $regime_tributario = "Lucro Real";
+    } else if ($regime_tributario == "cad_regime_presumido") {
+        $regime_tributario = "Lucro Presumido";
+    } else if ($regime_tributario == "cad_regime_outro") {
+        $regime_tributario = "Outro";
+    }
     $conexao = new Conexao();
     $sqlInsert = "UPDATE mv_parametrizacao SET RegimeTributario = ? WHERE id = ?";
     $Variaveis = [$regime_tributario, $_SESSION['idParametrizacao']];
@@ -184,7 +195,8 @@ if (isset($_GET['idVisualizarParametrizacao']) && !empty($_GET['idVisualizarPara
         FROM mv_parametrizacao a
         LEFT JOIN cadempresa b ON a.IdEmpresa = b.id
         LEFT JOIN cadcontador c ON a.IdContador = c.IdContador
-        LEFT JOIN usuarios d ON a.IdUsuario = d.id");
+        LEFT JOIN usuarios d ON a.IdUsuario = d.id
+        ORDER BY a.id DESC");
         echo json_encode(["status" => "ok", "msg" => $res]);
     }else{
         $conexao = new Conexao();

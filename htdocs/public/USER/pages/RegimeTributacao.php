@@ -8,27 +8,27 @@
         <form class="center" id="form-cadastro-regime-tributario" method="post" enctype="multipart/form-data">
 
             <div class="group-input-check">
-                <input type="checkbox" name="RegimeTributario" id="cad_regime_mei" require>
+                <input type="checkbox" name="RegimeTributario" id="cad_regime_mei" value="MEI" require>
                 <label for="cad_regime_mei" class="check-lembrar">MEI</label>
             </div>
 
             <div class="group-input-check">
-                <input type="checkbox" name="RegimeTributario" id="cad_regime_simples" require>
+                <input type="checkbox" name="RegimeTributario" id="cad_regime_simples" value="Simples Nacional" require>
                 <label for="cad_regime_simples" class="check-lembrar">Simples Nacional</label>
             </div>
 
             <div class="group-input-check">
-                <input type="checkbox" name="RegimeTributario" id="cad_regime_real" require>
+                <input type="checkbox" name="RegimeTributario" id="cad_regime_real" value="Lucro Real" require>
                 <label for="cad_regime_real" class="check-lembrar">Lucro Real</label>
             </div>
 
             <div class="group-input-check">
-                <input type="checkbox" name="RegimeTributario" id="cad_regime_presumido" require>
+                <input type="checkbox" name="RegimeTributario" id="cad_regime_presumido" value="Lucro Presumido" require>
                 <label for="cad_regime_presumido" class="check-lembrar">Lucro Presumido</label>
             </div>
 
             <div class="group-input-check">
-                <input type="checkbox" name="RegimeTributario" id="cad_regime_outro" require>
+                <input type="checkbox" name="RegimeTributario" id="cad_regime_outro" value="Outro" require>
                 <label for="cad_regime_outro" class="check-lembrar">Outro</label>
             </div>
 

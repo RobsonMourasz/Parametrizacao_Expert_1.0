@@ -104,7 +104,6 @@ async function AbrirModal(id, arrayDados, modal) {
 
                     const form = document.getElementById("form-empresa");
                     const inputs = form.querySelectorAll("input");
-
                     const valores = [
                         arrayDados[i].id,
                         arrayDados[i].NomeEmpresa,
@@ -118,12 +117,12 @@ async function AbrirModal(id, arrayDados, modal) {
                         arrayDados[i].ModeloCertificado,
                         arrayDados[i].SenhaCertificado,
                         arrayDados[i].RegimeTributario,
-                        arrayDados[i].JaEmitiuNFCe,
-                        arrayDados[i].JaEmitiuNFe,
-                        arrayDados[i].JaEmitiuSat,
-                        arrayDados[i].IraEmitirNFCe,
-                        arrayDados[i].IraEmitirNFe,
-                        arrayDados[i].IraEmitirSat,
+                        arrayDados[i].JaEmitiuNFCe ? arrayDados[i].JaEmitiuNFCe.toUpperCase() : '',
+                        arrayDados[i].JaEmitiuNFe ? arrayDados[i].JaEmitiuNFe.toUpperCase() : '',
+                        arrayDados[i].JaEmitiuSat ? arrayDados[i].JaEmitiuSat.toUpperCase() : '',
+                        arrayDados[i].IraEmitirNFCe ? arrayDados[i].IraEmitirNFCe.toUpperCase() : '',
+                        arrayDados[i].IraEmitirNFe ? arrayDados[i].IraEmitirNFe.toUpperCase() : '',
+                        arrayDados[i].IraEmitirSat ? arrayDados[i].IraEmitirSat.toUpperCase() : '',
                         arrayDados[i].UltimaNFCe,
                         arrayDados[i].UltimaNFe,
                         arrayDados[i].ModoPreenchimento,
@@ -216,16 +215,37 @@ function CriarTabelaEmpresas(dados) {
             } else if (dados[index].ModoPreenchimento == "FINALIZADO") {
                 span.className = "verdadeiro";
             }
-
             span.textContent = dados[index].ModoPreenchimento;
+
+            let divCopy = document.createElement("div");
+            divCopy.className = "table-cell";
+            divCopy.className = "table-cell";
+            let link  = document.createElement("a");
+            link.href = "#";
+            link.className = "copy-link";
+            link.onclick = function () {
+                var input = document.createElement("input");
+                const raiz = window.location.origin;
+                let path = window.location.pathname;
+                path = path.replace("/index.php", "");
+                path = path.replace("/ADM", "");
+                input.setAttribute("value", `${raiz}${path}/user/index.php?empresa=${dados[index].id}`);
+                document.body.appendChild(input);
+                input.select();
+                document.execCommand("copy");
+                document.body.removeChild(input);
+                alert("Link copiado para a área de transferência!");
+                };
+                
             divModoPreenchimento.appendChild(span);
 
             // Adiciona os elementos ao tbody
             tbody.appendChild(divRow);
             divRow.appendChild(divNomeEmpresa);
             divRow.appendChild(divCpfCnpj);
-
             divRow.appendChild(divModoPreenchimento);
+            divRow.appendChild(divCopy);
+            divCopy.appendChild(link);
         }
     } else {
         let divRow = document.createElement("div");
