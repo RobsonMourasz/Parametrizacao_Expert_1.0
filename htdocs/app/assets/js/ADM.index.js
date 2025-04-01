@@ -44,11 +44,14 @@
         }
     });
 
-    AbrirModalVisualizar.addEventListener("dblclick", (e) => {
+    AbrirModalVisualizar.addEventListener("dblclick", async(e) => {
         let campo = e.target;
         let id = campo.parentNode.querySelector("div").id;
-        if (id !== undefined && id !== "" && id !== null && id !== 0) {
-            AbrirModal(id, BuscarParametrizacao(id), "modal-visualizar-empresa");
+        if (id !== undefined || id !== "" || id !== null || id !== 0) {
+            const teste = await BuscarParametrizacao(id)
+            if (teste[0].id != "0" ){
+                AbrirModal(id, teste, "modal-visualizar-empresa");
+            }
         }
     });
 
@@ -59,7 +62,7 @@
             const resp = await ZerarParametrizacao(document.getElementById("id-parametrizacao").value);
             if (resp) {
                 alerta('success', 'Parametrização zerada com sucesso!');
-                DadosParametrizacao = await BuscarParametrizacao("");
+                DadosParametrizacao = await BuscarParametrizacao(0);
                 CriarTabelaEmpresas(DadosParametrizacao);
             } else {
                 alerta('danger', 'Erro ao zerar a parametrização!');
@@ -95,7 +98,8 @@ async function AbrirModal(id, arrayDados, modal) {
     if (modal === 'modal-visualizar-empresa') {
 
         for (let i = 0; i < arrayDados.length; i++) {
-            if (arrayDados[i].id === id) {
+            if (arrayDados[i].id == id) {
+
                 try {
 
                     const form = document.getElementById("form-empresa");
@@ -113,6 +117,7 @@ async function AbrirModal(id, arrayDados, modal) {
                         arrayDados[i].usuario,
                         arrayDados[i].ModeloCertificado,
                         arrayDados[i].SenhaCertificado,
+                        arrayDados[i].RegimeTributario,
                         arrayDados[i].JaEmitiuNFCe,
                         arrayDados[i].JaEmitiuNFe,
                         arrayDados[i].JaEmitiuSat,
@@ -121,6 +126,11 @@ async function AbrirModal(id, arrayDados, modal) {
                         arrayDados[i].IraEmitirSat,
                         arrayDados[i].UltimaNFCe,
                         arrayDados[i].UltimaNFe,
+                        arrayDados[i].ModoPreenchimento,
+                        arrayDados[i].Tributados,
+                        arrayDados[i].ST,
+                        arrayDados[i].Isento,
+                        arrayDados[i].Outros,
                     ];
 
                     // Itera pelos inputs e pelos valores simultaneamente
@@ -151,11 +161,11 @@ function FecharModal(id) {
 
 async function BuscarParametrizacao(id) {
     try {
-        if (id == ""){
+
+        if (id == "" || id == null || id == undefined || id == 0) {
             id = "todos"
-        }else{
-            id = parseInt(id);
         }
+
         const response = await fetch(`../../src/href/routes.php?idVisualizarParametrizacao=${id}`);
         const data = await response.json();
         let DadosParametrizacao = [];
@@ -182,7 +192,6 @@ async function BuscarParametrizacao(id) {
 function CriarTabelaEmpresas(dados) {
     let tbody = document.getElementById("table-body-empresas");
     tbody.innerHTML = ""; // Limpa o conteúdo anterior
-    console.log(dados);
     if (dados != "Não há registros") {
         for (let index = 0; index < dados.length; index++) {
             let divRow = document.createElement("div");

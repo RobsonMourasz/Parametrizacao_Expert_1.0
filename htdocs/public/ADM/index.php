@@ -89,53 +89,61 @@
             </div>
             <div class="modal-body">
                 <form action="" id="form-empresa" class="modal-form">
-                    
+
                     <input type="number" name="id" id="id-parametrizacao" hidden>
 
                     <div class="group-input">
-                        <label for="nome">Nome da Empresa</label>
+                        <label for="nome_empresa_cliente">Nome da Empresa</label>
                         <input type="text" name="nome_empresa_cliente" id="nome_empresa_cliente" value="" readonly>
                     </div>
                     <div class="group-input">
-                        <label for="cnpj">CNPJ</label>
+                        <label for="cnpj_empresa_cliente">CNPJ</label>
                         <input type="text" name="cnpj_empresa_cliente" id="cnpj_empresa_cliente" value="" readonly>
                     </div>
                     <div class="group-input">
-                        <label for="status">Escritório</label>
+                        <label for="razao_escritorio">Escritório</label>
                         <input type="text" name="razao_escritorio" id="razao_escritorio" value="" readonly>
                     </div>
                     <div class="group-input">
-                        <label for="status">CPF ou CNPJ do escritório</label>
+                        <label for="cnpj_escritorio">CPF ou CNPJ do escritório</label>
                         <input type="text" name="cnpj_escritorio" id="cnpj_escritorio" value="" readonly>
                     </div>
                     <div class="group-input">
-                        <label for="status">Email do escritório</label>
+                        <label for="email_escritorio">Email do escritório</label>
                         <input type="text" name="email_escritorio" id="email_escritorio" value="" readonly>
                     </div>
                     <div class="group-input">
-                        <label for="status">Telefone</label>
+                        <label for="telefone_escritorio">Telefone</label>
                         <input type="text" name="telefone_escritorio" id="telefone_escritorio" value="" readonly>
                     </div>
                     <div class="group-input">
-                        <label for="status">Responsável por preencher</label>
+                        <label for="responsavel_escritorio">Responsável por preencher</label>
                         <input type="text" name="responsavel_escritorio" id="responsavel_escritorio" value="" readonly>
                     </div>
                     <div class="group-input">
-                        <label for="status">Usuario Expert</label>
+                        <label for="usuario_expert">Usuario Expert</label>
                         <input type="text" name="usuario_expert" id="usuario_expert" value="" readonly>
                     </div>
 
                     <div class="row">
                         <div class="col">
                             <div class="group-input">
-                                <label for="status">Modelo Certificado</label>
+                                <label for="modelo_certificado">Modelo Certificado</label>
                                 <input type="text" name="modelo_certificado" id="modelo_certificado" value="" readonly>
                             </div>
                         </div>
                         <div class="col">
                             <div class="group-input">
-                                <label for="status">Senha</label>
+                                <label for="senha_certificado">Senha</label>
                                 <input type="text" name="senha_certificado" id="senha_certificado" value="" readonly>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="group-input">
+                                <label for="RegimeTributario">Regime Tributário</label>
+                                <input type="text" name="RegimeTributario" id="RegimeTributario" value="" readonly>
                             </div>
                         </div>
                     </div>
@@ -144,19 +152,19 @@
 
                         <div class="col">
                             <div class="group-input">
-                                <label for="status">Já emitiu NFC-e ?</label>
+                                <label for="ja_emitiu_nfce">Já emitiu NFC-e ?</label>
                                 <input type="text" name="ja_emitiu_nfce" id="ja_emitiu_nfce" value="" readonly>
                             </div>
                         </div>
                         <div class="col">
                             <div class="group-input">
-                                <label for="status">Já emitiu NF-e ?</label>
+                                <label for="ja_emitiu_nfe">Já emitiu NF-e ?</label>
                                 <input type="text" name="ja_emitiu_nfe" id="ja_emitiu_nfe" value="" readonly>
                             </div>
                         </div>
                         <div class="col">
                             <div class="group-input">
-                                <label for="status">Já emitiu SAT ?</label>
+                                <label for="ja_emitiu_sat">Já emitiu SAT ?</label>
                                 <input type="text" name="ja_emitiu_sat" id="ja_emitiu_sat" value="" readonly>
                             </div>
                         </div>
@@ -165,19 +173,19 @@
                     <div class="row">
                         <div class="col">
                             <div class="group-input">
-                                <label for="status">Vai emitir NFC-e ?</label>
+                                <label for="vai_emitir_nfce">Vai emitir NFC-e ?</label>
                                 <input type="text" name="vai_emitir_nfce" id="vai_emitir_nfce" value="" readonly>
                             </div>
                         </div>
                         <div class="col">
                             <div class="group-input">
-                                <label for="status">Vai emitir NF-e ?</label>
+                                <label for="vai_emitir_nfe">Vai emitir NF-e ?</label>
                                 <input type="text" name="vai_emitir_nfe" id="vai_emitir_nfe" value="" readonly>
                             </div>
                         </div>
                         <div class="col">
                             <div class="group-input">
-                                <label for="status">Vai emitir SAT ?</label>
+                                <label for="vai_emitir_sat">Vai emitir SAT ?</label>
                                 <input type="text" name="vai_emitir_sat" id="vai_emitir_sat" value="" readonly>
                             </div>
                         </div>
@@ -186,17 +194,55 @@
                     <div class="row">
                         <div class="col">
                             <div class="group-input">
-                                <label for="status">Ultima NFC-e ?</label>
+                                <label for="ultima_nfce">Ultima NFC-e ?</label>
                                 <input type="text" name="ultima_nfce" id="ultima_nfce" value="" readonly>
                             </div>
                         </div>
                         <div class="col">
                             <div class="group-input">
-                                <label for="status">Ultima NF-e ?</label>
+                                <label for="ultima_nfe">Ultima NF-e ?</label>
                                 <input type="text" name="ultima_nfe" id="ultima_nfe" value="" readonly>
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="group-input">
+                                <label for="ModoPreenchimento">Preenchimento</label>
+                                <input type="text" name="ModoPreenchimento" id="ModoPreenchimento" value="" readonly>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <div class="group-input">
+                                <label for="Tributados">Produtos Tributados</label>
+                                <input type="text" name="Tributados" id="Tributados" value="" readonly>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="group-input">
+                                <label for="ST">Produtos ST</label>
+                                <input type="text" name="ST" id="ST" value="" readonly>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="group-input">
+                                <label for="Isento">Produtos Isentos</label>
+                                <input type="text" name="Isento" id="Isento" value="" readonly>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="group-input">
+                                <label for="Outros">Produtos Outros</label>
+                                <input type="text" name="Outros" id="Outros" value="" readonly>
+                            </div>
+                        </div>
+                    </div>
+
                 </form>
             </div>
 
