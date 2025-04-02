@@ -1,4 +1,7 @@
 <?php 
+if(!isset($_SESSION)){
+    session_start();
+}
 if (isset($_SESSION['idParametrizacao']) && !empty($_SESSION['idParametrizacao'])){ ?>
 <div class="card h-100">
 
@@ -12,7 +15,7 @@ if (isset($_SESSION['idParametrizacao']) && !empty($_SESSION['idParametrizacao']
             <div class="row">
 
                 <div class="col">
-                    <div class="table-response">
+                    <div class="table-response" id = "tabela-dentro-estado">
                         <div class="table-header">
                             <h2>CFOP Dentro do estado</h2>
                         </div>
@@ -29,7 +32,7 @@ if (isset($_SESSION['idParametrizacao']) && !empty($_SESSION['idParametrizacao']
                 </div>
 
                 <div class="col">
-                    <div class="table-response">
+                    <div class="table-response" id="tabela-fora-estado">
                         <div class="table-header">
                             <h2>CFOP Fora do estado</h2>
                         </div>

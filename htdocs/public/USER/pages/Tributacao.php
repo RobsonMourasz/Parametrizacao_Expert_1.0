@@ -1,4 +1,7 @@
 <?php 
+if(!isset($_SESSION)){
+    session_start();
+}
 if (isset($_SESSION['idParametrizacao']) && !empty($_SESSION['idParametrizacao'])){ ?>
 <div class="card h-100">
 
@@ -34,7 +37,7 @@ if (isset($_SESSION['idParametrizacao']) && !empty($_SESSION['idParametrizacao']
                 <div class="col">
                     <div class="group-input">
                         <label for="cad_outros">Outros</label>
-                        <input type="number" name="outos" id="cad_outros" require>
+                        <input type="number" name="outros" id="cad_outros" require>
                     </div>
                 </div>
 

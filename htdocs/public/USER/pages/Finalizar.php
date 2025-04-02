@@ -1,4 +1,7 @@
 <?php 
+if(!isset($_SESSION)){
+    session_start();
+}
 if (isset($_SESSION['idParametrizacao']) && !empty($_SESSION['idParametrizacao'])){ ?>
 <div class="card h-100">
 
