@@ -67,7 +67,7 @@ if (isset($_POST['tipo']) && $_POST['tipo'] == "CadCertificado") {
     $modelo_certificado =  filter_input(INPUT_POST, 'ModeloCertificado', FILTER_SANITIZE_SPECIAL_CHARS);
 
     $conexao = new Conexao();
-    if ($ModeloCertificado == "A1") {
+    if ($modelo_certificado == "A1") {
         $senha_certificado =  filter_input(INPUT_POST, 'senha_certificado', FILTER_SANITIZE_SPECIAL_CHARS);
         $certificado = $_FILES['certificado'];
         $mover = new MoverArquivo();
@@ -225,6 +225,7 @@ if (isset($_GET['Empresas']) && !empty($_GET['Empresas'])) {
         $id = intval(limpar_texto($_GET['Empresas']));
         $conexao = new Conexao();
         $res = $conexao->ExecutarSql("SELECT * FROM cadempresa WHERE id = $id");
+        $_SESSION['cpf_cnpj'] = $res[0]['Cpf_Cnpj'];
         echo json_encode(["status" => "ok", "msg" => $res]);
     }
 }
@@ -234,7 +235,7 @@ if (isset($_GET['idGerarLinkParametrizacao']) && !empty($_GET['idGerarLinkParame
     $id = intval(limpar_texto($_GET['idGerarLinkParametrizacao']));
     try {
         $conexao = new Conexao();
-        $res = $conexao->Cadastrar("INSERT INTO mv_parametrizacao VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,NOW(),NOW(),?)", ['iiiissssssssssss', NULL, 0, $id, $_SESSION['idUsuario'], NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, "CRIADO"]);
+        $res = $conexao->Cadastrar("INSERT INTO mv_parametrizacao VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,NOW(),NOW(),?)",[NULL, 0, $id, $_SESSION['idUsuario'], NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,  NULL, NULL,NULL, NULL, NULL, NULL, "CRIADO"]);
 
         $temp = $conexao->GetUltimoId("mv_parametrizacao");
         $id = intval($temp);

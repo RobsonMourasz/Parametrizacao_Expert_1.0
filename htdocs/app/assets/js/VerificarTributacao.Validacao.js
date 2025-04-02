@@ -18,7 +18,7 @@
                     preencherTabelaCFOP(5405, 500, 6405, 500);
                     break;
                 case "Isentos":
-                    preencherTabelaCFOP(5102, 4000, 6102, 400);
+                    preencherTabelaCFOP(5102, 400, 6102, 400);
                     break;
 
                 case "Outros":

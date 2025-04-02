@@ -84,6 +84,8 @@
                 path = path.replace("/index.php", "");
                 path = path.replace("/ADM", "");
                 document.getElementById("link").value = `${raiz}${path}/user/index.php?empresa=${idLink}`;
+                DadosParametrizacao = await BuscarParametrizacao();
+                CriarTabelaEmpresas(DadosParametrizacao);
             }
             alerta("success", 'Link gerado com sucesso!');
         } else {

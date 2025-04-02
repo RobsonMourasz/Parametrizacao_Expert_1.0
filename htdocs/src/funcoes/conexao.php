@@ -51,9 +51,23 @@ class Conexao
             return $this->conexao->error;
         }
 
-        // Desestrutura os parâmetros e os vincula
         if (!empty($params)) {
-            $stmt->bind_param(...$params);
+            // Determina os tipos dos parâmetros dinamicamente
+            $tipos = ''; // String que define os tipos dos parâmetros
+            foreach ($params as $param) {
+                if (is_int($param)) {
+                    $tipos .= 'i'; // Inteiro
+                } elseif (is_float($param)) {
+                    $tipos .= 'd'; // Decimal
+                } elseif (is_string($param)) {
+                    $tipos .= 's'; // String
+                } else {
+                    $tipos .= 'b'; // Blob (binário)
+                }
+            }
+    
+            // Vincula os parâmetros dinamicamente
+            $stmt->bind_param($tipos, ...$params);
         }
 
         // Executa a consulta
