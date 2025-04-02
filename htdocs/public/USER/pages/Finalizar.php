@@ -11,7 +11,7 @@ if (isset($_SESSION['idParametrizacao']) && !empty($_SESSION['idParametrizacao']
 
 <div class="card-body w-100 center">
     <form class="center" id="form-finalizar">
-
+        <input type="number" id="id-parametrizacao" value="<?php echo $_SESSION['idParametrizacao'] ?>" hidden>
         <div class="row">
 
             <div class="col">
@@ -20,13 +20,13 @@ if (isset($_SESSION['idParametrizacao']) && !empty($_SESSION['idParametrizacao']
                         <h2>Modelo do Certificado</h2>
                     </div>
                     <div class="table-body">
-                        <span>A1</span>
+                        <span id="modelo-certificado"></span>
                     </div>
                     <div class="table-header">
                         <h2>Senha</h2>
                     </div>
                     <div class="table-body">
-                        <span>1234</span>
+                        <span id="senha-certificado"></span>
                     </div>
                 </div>
             </div>
@@ -38,7 +38,7 @@ if (isset($_SESSION['idParametrizacao']) && !empty($_SESSION['idParametrizacao']
                         <h2>Regime tributário</h2>
                     </div>
                     <div class="table-body">
-                        <span>Simples Nacional</span>
+                        <span id="regime-tributario" ></span>
                     </div>
                 </div>
             </div>
@@ -49,8 +49,7 @@ if (isset($_SESSION['idParametrizacao']) && !empty($_SESSION['idParametrizacao']
                         <h2>Irá emitir</h2>
                     </div>
                     <div class="table-body">
-                        <span>NF-e</span>
-                        <span>NFC-e</span>
+                        <span id="ira-emitir"></span>
                     </div>
                 </div>
             </div>
@@ -62,7 +61,7 @@ if (isset($_SESSION['idParametrizacao']) && !empty($_SESSION['idParametrizacao']
                         <h2>Ultima NFe </h2>
                     </div>
                     <div class="table-body">
-                        <span>0</span>
+                        <span id="ultima-nfe"></span>
                     </div>
                 </div>
             </div>
@@ -74,32 +73,20 @@ if (isset($_SESSION['idParametrizacao']) && !empty($_SESSION['idParametrizacao']
                         <h2>Ultima NFC-e </h2>
                     </div>
                     <div class="table-body">
-                        <span>0</span>
+                        <span id="ultima-nfce"></span>
                     </div>
                 </div>
             </div>
 
-            <div class="col">
-                <div class="table-response">
-                    <div class="table-header">
-                        <h2>Regime tributário</h2>
-                    </div>
-                    <div class="table-body">
-                        <span>Simples Nacional</span>
-                    </div>
-                </div>
-            </div>
         </div>
         <div class="row">
             <div class="col">
                 <div class="table-response">
                     <div class="table-header">
-                        <h2>Tributação: </h2>
+                        <h2>Tributação das mercadorias: </h2>
                     </div>
                     <div class="table-body">
-                        <span>Tributados: 50%</span>
-                        <span>ST: 40%</span>
-                        <span>Outros: 10%</span>
+                        <span id="tributacao-itens"></span>
                     </div>
                 </div>
             </div>
