@@ -1,4 +1,6 @@
-<div class="card h-100">
+<?php 
+if (isset($_GET['empresa']) && !empty($_GET['empresa'])){ ?>
+    <div class="card h-100">
 
     <div class="card-header w-100 center">
         <h1><small>Etapa 1:</small> Informações do Escritório / Contador</h1>
@@ -43,3 +45,7 @@
 </div> <!-- card -->
 
 <script src="../../app/assets/js/Home.Validacao.Index.js"></script>
+<?php }else{
+    header('Location: ../../404.php');
+    exit();
+}

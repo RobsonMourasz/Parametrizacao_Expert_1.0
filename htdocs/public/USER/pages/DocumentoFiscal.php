@@ -1,4 +1,6 @@
-<div class="card">
+<?php 
+if (isset($_SESSION['idParametrizacao']) && !empty($_SESSION['idParametrizacao'])){ ?>
+    <div class="card">
 
     <div class="card-header w-100 center">
         <h1><small>Etapa 4:</small> Qual Tipo de Emissao fiscal irá emitir?</h1>
@@ -127,3 +129,7 @@
 </div> <!-- card -->
 
 <script src="../../app/assets/js/DocumentoFiscal.Validacao.js"></script>
+<?php }else {
+    header('Location: ../../404.php');
+    exit();
+}

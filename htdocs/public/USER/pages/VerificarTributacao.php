@@ -1,3 +1,5 @@
+<?php 
+if (isset($_SESSION['idParametrizacao']) && !empty($_SESSION['idParametrizacao'])){ ?>
 <div class="card h-100">
 
     <div class="card-header w-100 center">
@@ -51,3 +53,7 @@
     </div> <!-- card-body -->
 </div> <!-- card -->
 <script src="../../app/assets/js/VerificarTributacao.Validacao.js"></script>
+<?php }else{
+    header('Location: ../../404.php');
+    exit();
+} ?>

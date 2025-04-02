@@ -134,6 +134,7 @@ async function AbrirModal(id, arrayDados, modal) {
 
                     // Itera pelos inputs e pelos valores simultaneamente
                     inputs.forEach((input, i) => {
+                        console.log(valores[i]);
                         if (valores[i] !== undefined) {
                             input.value = valores[i]; // Atribui o valor correspondente ao input
                         }

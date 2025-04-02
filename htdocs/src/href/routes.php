@@ -19,6 +19,7 @@ if (isset($_POST['tipo']) && $_POST['tipo'] == "CadEscritorio") {
     $nome_responsavel = filter_input(INPUT_POST, 'nome_responsavel', FILTER_SANITIZE_SPECIAL_CHARS);
     $telefone = limpar_texto(filter_input(INPUT_POST, 'telefone', FILTER_SANITIZE_SPECIAL_CHARS));
     $idParametrizacao = $_SESSION['idParametrizacao'];
+    echo "<script>console.log($idParametrizacao)</script>";
     $conexao = new Conexao();
 
     $JaCadastrado = $conexao->ExecutarSql("SELECT * FROM cadcontador WHERE CpfCnpj = '$cpf_cnpj'");
@@ -246,8 +247,20 @@ if (isset($_GET['idGerarLinkParametrizacao']) && !empty($_GET['idGerarLinkParame
 
 if (isset($_GET['PreencherEmpresa']) && !empty($_GET['PreencherEmpresa'])) {
     $id = intval(limpar_texto($_GET['PreencherEmpresa']));
-    $conexao = new Conexao();
-    $res = $conexao->ExecutarSql("SELECT * FROM mv_parametrizacao WHERE IdEmpresa = $id ORDER BY id DESC  LIMIT 1");
-    $_SESSION['idParametrizacao'] = $res[0]['id'];
-    echo json_encode(["status" => "ok", "msg" => $res]);
+    try {
+        $conexao = new Conexao();
+        $res = $conexao->ExecutarSql("SELECT * FROM mv_parametrizacao WHERE id = $id ORDER BY id DESC  LIMIT 1");
+        if($res == "Não há registros"){
+            $_SESSION['idParametrizacao'] = 0;
+            echo json_encode(["status" => "ok", "msg" => "Nenhum registro encontrado!"]);
+        }else{
+            $_SESSION['idParametrizacao'] = $res[0]['id'];
+            echo json_encode(["status" => "ok", "msg" => $res[0]['IdEmpresa']]);
+        }
+    } catch (\Throwable $th) {
+        $_SESSION['idParametrizacao'] = 0;
+        echo json_encode(["status" => "erro", "msg" => $th->getMessage()]);
+    }
+
+
 }

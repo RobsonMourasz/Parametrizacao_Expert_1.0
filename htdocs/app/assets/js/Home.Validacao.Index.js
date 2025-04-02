@@ -5,7 +5,7 @@
         const BuscaDadosEmpresa = await fetch(`../../src/href/routes.php?PreencherEmpresa=${idEmpresa}`)
         if (BuscaDadosEmpresa.ok){
             const dadosEmpresa = await BuscaDadosEmpresa.json();
-            const empresa = await fetch(`../../src/href/routes.php?Empresas=${dadosEmpresa.msg[0].IdEmpresa}`)
+            const empresa = await fetch(`../../src/href/routes.php?Empresas=${dadosEmpresa.msg}`)
             const respEmpresa = await empresa.json();
             alerta("success", `Preencha a parametrização referente a empresa : ${respEmpresa.msg[0].NomeEmpresa}`);
         }

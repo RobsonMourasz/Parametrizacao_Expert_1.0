@@ -1,3 +1,5 @@
+<?php 
+if (isset($_SESSION['idParametrizacao']) && !empty($_SESSION['idParametrizacao'])){ ?>
 <div class="card h-100">
 
     <div class="card-header w-100 center">
@@ -60,3 +62,7 @@
         })
     })();
 </script>
+<?php }else{
+    header('Location: ../../404.php');
+    exit();
+}
