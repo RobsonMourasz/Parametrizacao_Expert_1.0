@@ -23,10 +23,10 @@ if (isset($_POST['tipo']) && $_POST['tipo'] == "CadEscritorio") {
 
     $JaCadastrado = $conexao->ExecutarSql("SELECT * FROM cadcontador WHERE CpfCnpj = '$cpf_cnpj'");
 
-    if (count($JaCadastrado) == 0) {
+    if ($JaCadastrado == "Não há registros") {
 
-        $SqlInsert = "INSERT cadcontador (RazaoSocial, CpfCnpj, Email, NomeResponsavel, Telefone, DataCadastro, Modificacao) VALUES (?,?,?,?,?,NOW(),NOW())";
-        $Variaveis = ['sssss', $razao, $cpf_cnpj, $email, $nome_responsavel, $telefone];
+        $SqlInsert = "INSERT cadcontador VALUES (?,?,?,?,?,?,NOW(),NOW())";
+        $Variaveis = [NULL,$razao, $cpf_cnpj, $email, $telefone, $nome_responsavel];
         if ($conexao->Cadastrar($SqlInsert, $Variaveis)) {
             $novoID = $conexao->GetUltimoId("cadcontador");
         }
