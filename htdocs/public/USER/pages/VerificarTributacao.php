@@ -16,35 +16,13 @@ if (isset($_SESSION['idParametrizacao']) && !empty($_SESSION['idParametrizacao']
 
                 <div class="col">
                     <div class="table-response" id = "tabela-dentro-estado">
-                        <div class="table-header">
-                            <h2>CFOP Dentro do estado</h2>
-                        </div>
-                        <div class="table-body">
-                            <span>5102</span>
-                        </div>
-                        <div class="table-header">
-                            <h2>CSON Dentro do estado</h2>
-                        </div>
-                        <div class="table-body">
-                            <span>102</span>
-                        </div>
+
                     </div>
                 </div>
 
                 <div class="col">
                     <div class="table-response" id="tabela-fora-estado">
-                        <div class="table-header">
-                            <h2>CFOP Fora do estado</h2>
-                        </div>
-                        <div class="table-body">
-                            <span>6102</span>
-                        </div>
-                        <div class="table-header">
-                            <h2>CSON Fora do estado</h2>
-                        </div>
-                        <div class="table-body">
-                            <span>102</span>
-                        </div>
+
                     </div>
                 </div>
             </div>
