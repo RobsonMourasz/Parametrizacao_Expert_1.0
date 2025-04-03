@@ -26,7 +26,7 @@ if (isset($_POST['tipo']) && $_POST['tipo'] == "CadEscritorio") {
     if ($JaCadastrado == "Não há registros") {
 
         $SqlInsert = "INSERT cadcontador VALUES (?,?,?,?,?,?,NOW(),NOW())";
-        $Variaveis = [NULL,$razao, $cpf_cnpj, $email, $telefone, $nome_responsavel];
+        $Variaveis = [NULL,$razao, $cpf_cnpj, $email, $nome_responsavel, $telefone];
         if ($conexao->Cadastrar($SqlInsert, $Variaveis)) {
             $novoID = $conexao->GetUltimoId("cadcontador");
         }
@@ -177,7 +177,7 @@ if (isset($_GET['idZerarParametrizacao']) && !empty($_GET['idZerarParametrizacao
     $id = intval(limpar_texto($_GET['idZerarParametrizacao']));
     $conexao = new Conexao();
     $res = $conexao->UpdateSQL(
-        "UPDATE mv_parametrizacao SET ModeloCertificado = NULL, SenhaCertificado = NULL, RegimeTributario = NULL, IraEmitirNFCe = NULL, IraEmitirNFe = NULL, IraEmitirSat = NULL, JaEmitiuNFCe = NULL, JaEmitiuNFe = NULL, JaEmitiuSat = NULL, UltimaNFCe = NULL, UltimaNFe = NULL, ModoPreenchimento = 'CRIADO' WHERE id = ?",
+        "UPDATE mv_parametrizacao SET IdContador = 0, ModeloCertificado = NULL, SenhaCertificado = NULL, RegimeTributario = NULL, IraEmitirNFCe = NULL, IraEmitirNFe = NULL, IraEmitirSat = NULL, JaEmitiuNFCe = NULL, JaEmitiuNFe = NULL, JaEmitiuSat = NULL, UltimaNFCe = NULL, UltimaNFe = NULL, Tributados = NULL, ST = NULL, Isento = NULL, Outros = NULL, ModoPreenchimento = 'CRIADO' WHERE id = ?",
         [$id]
     );
 
@@ -249,10 +249,10 @@ if (isset($_GET['PreencherEmpresa']) && !empty($_GET['PreencherEmpresa'])) {
     $id = intval(limpar_texto($_GET['PreencherEmpresa']));
     try {
         $conexao = new Conexao();
-        $res = $conexao->ExecutarSql("SELECT * FROM mv_parametrizacao WHERE id = $id ORDER BY id DESC  LIMIT 1");
+        $res = $conexao->ExecutarSql("SELECT * FROM mv_parametrizacao WHERE id = $id AND ModoPreenchimento = 'CRIADO' ORDER BY id DESC  LIMIT 1");
         if($res == "Não há registros"){
             $_SESSION['idParametrizacao'] = 0;
-            echo json_encode(["status" => "ok", "msg" => "Nenhum registro encontrado!"]);
+            echo json_encode(["status" => "erro", "msg" => "Nenhum registro encontrado!"]);
         }else{
             $_SESSION['idParametrizacao'] = $res[0]['id'];
             echo json_encode(["status" => "ok", "msg" => $res[0]['IdEmpresa']]);
