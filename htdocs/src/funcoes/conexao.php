@@ -71,10 +71,14 @@ class Conexao
         }
 
         // Executa a consulta
-        if ($stmt->execute()) {
-            return true;
-        } else {
-            return $stmt->error;
+        try {
+            if ($stmt->execute()) {
+                return true;
+            } else {
+                return $stmt->error;
+            }
+        } catch (\Throwable $th) {
+            //throw $th;
         }
     }
 

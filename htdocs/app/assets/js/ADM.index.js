@@ -10,6 +10,7 @@
     });
 
     document.addEventListener("DOMContentLoaded", async () => {
+        const novasEmpresa = await fetch(`../../src/href/routes.php?BuscarEmpresas=todas`);
         DadosParametrizacao = await BuscarParametrizacao();
         CriarTabelaEmpresas(DadosParametrizacao);
     });
@@ -48,10 +49,11 @@
     document.getElementById("form-empresa-nome").addEventListener("input", async (e) => {
         let text = e.target.value;
         let resultados = [];
+        
         if (text !== "") {
             document.querySelector(".list-empresa").style.display = "flex";
-            resultados = DadosEmpresas.msg.filter((empresa) =>
-                empresa.NomeEmpresa.toLowerCase().includes(text));
+            resultados = DadosEmpresas.filter((dados) =>
+                dados.NomeEmpresa.toLowerCase().includes(text.toLowerCase()));
             PreenchimentoBuscaEmpresa(resultados)
         } else {
             document.querySelector(".list-empresa").style.display = "none";
@@ -325,7 +327,7 @@ async function PreenchimentoBuscaEmpresa(valores) {
     list.innerHTML = "";
     for (let index = 0; index < valores.length; index++) {
         let li = document.createElement("li");
-        li.textContent = valores[index].NomeEmpresa;
+        li.textContent = valores[index].NomeEmpresa + " -> " + FormatarCpfCnpj(valores[index].Cpf_Cnpj);
         li.setAttribute("cnpj", valores[index].Cpf_Cnpj);
         li.setAttribute("id", valores[index].id);
         li.classList.add("list-item");

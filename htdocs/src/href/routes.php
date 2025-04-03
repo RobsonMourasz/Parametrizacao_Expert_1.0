@@ -2,6 +2,7 @@
 
 use HTDOCS\funcoes\Conexao;
 use HTDOCS\funcoes\MoverArquivo;
+use HTDOCS\funcoes\SincronizarClientes;
 
 header("content-type: application/json");
 require_once __DIR__ . "/../../vendor/autoload.php";
@@ -26,7 +27,7 @@ if (isset($_POST['tipo']) && $_POST['tipo'] == "CadEscritorio") {
     if ($JaCadastrado == "Não há registros") {
 
         $SqlInsert = "INSERT cadcontador VALUES (?,?,?,?,?,?,NOW(),NOW())";
-        $Variaveis = [NULL,$razao, $cpf_cnpj, $email, $nome_responsavel, $telefone];
+        $Variaveis = [NULL, $razao, $cpf_cnpj, $email, $nome_responsavel, $telefone];
         if ($conexao->Cadastrar($SqlInsert, $Variaveis)) {
             $novoID = $conexao->GetUltimoId("cadcontador");
         }
@@ -115,7 +116,7 @@ if (isset($_POST['tipo']) && $_POST['tipo'] == "CadRegimeTributario") {
         } else {
             echo json_encode(["status" => "erro", "msg" => "Erro ao inserir regime tributario!"]);
         }
-    }catch (\Throwable $th) {
+    } catch (\Throwable $th) {
         echo json_encode(["status" => "erro", "msg" => "Erro ao atualizar regime tributario: " . $th->getMessage()]);
     }
 }
@@ -151,7 +152,7 @@ if (isset($_POST['tipo']) && $_POST['tipo'] == "CadTributacao") {
     $outros = filter_input(INPUT_POST, 'outros', FILTER_SANITIZE_SPECIAL_CHARS);
     $conexao = new Conexao();
     $sqlInsert = "UPDATE mv_parametrizacao SET Tributados = ?, ST = ?, Isento = ?, Outros = ? WHERE id = ?";
-    $Variaveis = [$trinutados.'%', $st.'%', $isento.'%', $outros.'%', $_SESSION['idParametrizacao']];
+    $Variaveis = [$trinutados . '%', $st . '%', $isento . '%', $outros . '%', $_SESSION['idParametrizacao']];
     try {
         if ($conexao->UpdateSQL($sqlInsert, $Variaveis)) {
             echo json_encode(["status" => "ok", "msg" => "Cadastrado com sucesso!"]);
@@ -163,7 +164,7 @@ if (isset($_POST['tipo']) && $_POST['tipo'] == "CadTributacao") {
     }
 }
 
-if(isset($_POST['confirmar']) && !empty($_POST['confirmar']) && $_POST['confirmar'] == "SIM"){
+if (isset($_POST['confirmar']) && !empty($_POST['confirmar']) && $_POST['confirmar'] == "SIM") {
     $conexao = new Conexao();
     try {
         $conexao->UpdateSQL("UPDATE mv_parametrizacao SET ModoPreenchimento = 'PREENCHIDO', DataAlteracao = ? WHERE id = ?", [date('Y-m-d H:i:s'), $_SESSION['idParametrizacao']]);
@@ -185,7 +186,7 @@ if (isset($_GET['idZerarParametrizacao']) && !empty($_GET['idZerarParametrizacao
 }
 
 if (isset($_GET['idVisualizarParametrizacao']) && !empty($_GET['idVisualizarParametrizacao'])) {
-    if($_GET['idVisualizarParametrizacao'] == "todos"){
+    if ($_GET['idVisualizarParametrizacao'] == "todos") {
         $conexao = new Conexao();
         $res = $conexao->ExecutarSql("SELECT 
         b.NomeEmpresa,	b.Cpf_Cnpj AS Cpf_Cnpj_empresa, 
@@ -198,7 +199,7 @@ if (isset($_GET['idVisualizarParametrizacao']) && !empty($_GET['idVisualizarPara
         LEFT JOIN usuarios d ON a.IdUsuario = d.id
         ORDER BY a.id DESC");
         echo json_encode(["status" => "ok", "msg" => $res]);
-    }else{
+    } else {
         $conexao = new Conexao();
         $res = $conexao->ExecutarSql("SELECT 
         b.NomeEmpresa,	b.Cpf_Cnpj AS Cpf_Cnpj_empresa, 
@@ -212,7 +213,6 @@ if (isset($_GET['idVisualizarParametrizacao']) && !empty($_GET['idVisualizarPara
         WHERE a.id = " . $_GET['idVisualizarParametrizacao']);
         echo json_encode(["status" => "ok", "msg" => $res]);
     }
-
 }
 
 
@@ -235,7 +235,7 @@ if (isset($_GET['idGerarLinkParametrizacao']) && !empty($_GET['idGerarLinkParame
     $id = intval(limpar_texto($_GET['idGerarLinkParametrizacao']));
     try {
         $conexao = new Conexao();
-        $res = $conexao->Cadastrar("INSERT INTO mv_parametrizacao VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,NOW(),NOW(),?)",[NULL, 0, $id, $_SESSION['idUsuario'], NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,  NULL, NULL,NULL, NULL, NULL, NULL, "CRIADO"]);
+        $res = $conexao->Cadastrar("INSERT INTO mv_parametrizacao VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,NOW(),NOW(),?)", [NULL, 0, $id, $_SESSION['idUsuario'], NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,  NULL, NULL, NULL, NULL, NULL, NULL, "CRIADO"]);
 
         $temp = $conexao->GetUltimoId("mv_parametrizacao");
         $id = intval($temp);
@@ -250,10 +250,10 @@ if (isset($_GET['PreencherEmpresa']) && !empty($_GET['PreencherEmpresa'])) {
     try {
         $conexao = new Conexao();
         $res = $conexao->ExecutarSql("SELECT * FROM mv_parametrizacao WHERE id = $id AND ModoPreenchimento = 'CRIADO' ORDER BY id DESC  LIMIT 1");
-        if($res == "Não há registros"){
+        if ($res == "Não há registros") {
             $_SESSION['idParametrizacao'] = 0;
             echo json_encode(["status" => "erro", "msg" => "Nenhum registro encontrado!"]);
-        }else{
+        } else {
             $_SESSION['idParametrizacao'] = $res[0]['id'];
             echo json_encode(["status" => "ok", "msg" => $res[0]['IdEmpresa']]);
         }
@@ -261,10 +261,9 @@ if (isset($_GET['PreencherEmpresa']) && !empty($_GET['PreencherEmpresa'])) {
         $_SESSION['idParametrizacao'] = 0;
         echo json_encode(["status" => "erro", "msg" => $th->getMessage()]);
     }
-
 }
 
-if (isset ($_GET['VerificarTributacao']) && empty($_GET['VerificarTributacao'])) {
+if (isset($_GET['VerificarTributacao']) && empty($_GET['VerificarTributacao'])) {
     $ID = intval(limpar_texto($_SESSION['idParametrizacao']));
     try {
         $conexao = new Conexao();
@@ -273,17 +272,20 @@ if (isset ($_GET['VerificarTributacao']) && empty($_GET['VerificarTributacao']))
     } catch (\Throwable $th) {
         echo json_encode(["status" => "erro", "msg" => $th->getMessage()]);
     }
-
 }
 
-if (isset ($_GET['ConcluirParametrizacao']) && !empty($_GET['ConcluirParametrizacao'])) {
+if (isset($_GET['ConcluirParametrizacao']) && !empty($_GET['ConcluirParametrizacao'])) {
     $ID = intval(limpar_texto($_GET['ConcluirParametrizacao']));
     try {
         $conexao = new Conexao();
-        $res = $conexao->UpdateSQL("UPDATE mv_parametrizacao SET ModoPreenchimento = 'FINALIZADO' WHERE id = ?",[$ID]);
+        $res = $conexao->UpdateSQL("UPDATE mv_parametrizacao SET ModoPreenchimento = 'FINALIZADO' WHERE id = ?", [$ID]);
         echo json_encode(["status" => "ok", "msg" => $res]);
     } catch (\Throwable $th) {
         echo json_encode(["status" => "erro", "msg" => $th->getMessage()]);
     }
+}
 
+if (isset($_GET['BuscarEmpresas']) && !empty($_GET['BuscarEmpresas'])) {
+    $Eai = new SincronizarClientes();
+    $Eai->Sincronizar();
 }
