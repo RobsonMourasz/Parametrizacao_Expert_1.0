@@ -275,3 +275,15 @@ if (isset ($_GET['VerificarTributacao']) && empty($_GET['VerificarTributacao']))
     }
 
 }
+
+if (isset ($_GET['ConcluirParametrizacao']) && !empty($_GET['ConcluirParametrizacao'])) {
+    $ID = intval(limpar_texto($_GET['ConcluirParametrizacao']));
+    try {
+        $conexao = new Conexao();
+        $res = $conexao->UpdateSQL("UPDATE mv_parametrizacao SET ModoPreenchimento = 'FINALIZADO' WHERE id = ?",[$ID]);
+        echo json_encode(["status" => "ok", "msg" => $res]);
+    } catch (\Throwable $th) {
+        echo json_encode(["status" => "erro", "msg" => $th->getMessage()]);
+    }
+
+}

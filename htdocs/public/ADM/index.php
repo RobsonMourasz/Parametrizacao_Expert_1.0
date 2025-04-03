@@ -26,12 +26,12 @@
                         <div class="row center">
                             <div class="col align-left">
                                 <div class="group-input w-100">
-                                    <input type="text" name="pesquisa" id="pesquisa" placeholder="Pesquisar">
+                                    <input type="text" name="pesquisa" id="input-pesquisa" placeholder="Digite sua busca..." autocomplete="off">
                                 </div>
                             </div>
                             <div class="col align-left">
                                 <div class="group-botoes w-30 align-left">
-                                    <input type="submit" name="pesquisar" id="pesquisar" class="btn btn-primary" value="pesquisar">
+                                    <input type="submit" name="pesquisar" id="btn-pesquisa" class="btn btn-primary" value="pesquisar">
 
                                 </div>
                             </div>
@@ -249,7 +249,8 @@
 
             <div class="modal-footer">
                 <div class="group-botoes">
-                    <button class="btn btn-success" id="zerar-parametrizacao">Zerar parametrização</button>
+                    <button class="btn btn-danger" id="zerar-parametrizacao">Zerar parametrização</button>
+                    <button class="btn btn-success" id="concluir-parametrizacao">Finalizar Parametrização</button>
                 </div>
 
             </div>

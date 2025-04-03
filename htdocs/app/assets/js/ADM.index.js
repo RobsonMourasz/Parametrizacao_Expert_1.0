@@ -31,6 +31,20 @@
         document.querySelector(".list-empresa").style.display = "none";
     });
 
+    document.getElementById("concluir-parametrizacao").addEventListener("click", async (e)=>{
+        e.preventDefault();
+        const conf = await fetch(`../../src/href/routes.php?ConcluirParametrizacao=${document.getElementById("id-parametrizacao").value}`);
+        const data = await conf.json();
+        if(data.status === "ok"){
+            AbrirModalVisualizar.innerHTML = "";
+            DadosParametrizacao = await BuscarParametrizacao();
+            CriarTabelaEmpresas(DadosParametrizacao);
+            FecharModal('modal-visualizar-empresa');
+        }else{
+            alerta("danger","Erro ao concluir a parametrização");
+        }
+    })
+
     document.getElementById("form-empresa-nome").addEventListener("input", async (e) => {
         let text = e.target.value;
         let resultados = [];
@@ -90,6 +104,24 @@
             alerta("success", 'Link gerado com sucesso!');
         } else {
             alerta('danger', 'Erro ao gerar o link!');
+        }
+    });
+
+    document.getElementById("btn-pesquisa").addEventListener("click", async  (e) => {
+        e.preventDefault();
+        const input = document.getElementById("input-pesquisa");
+        let resultados = [];
+        if (input.value.trim() !== "") {
+            resultados = DadosParametrizacao.filter((empresa) =>
+                empresa.NomeEmpresa.toLowerCase().includes(input.value.toLowerCase()));
+            
+            if(resultados.length === 0){
+                CriarTabelaEmpresas("Não há registros")
+            }else{
+                CriarTabelaEmpresas(resultados)
+            }
+            
+
         }
     });
 
